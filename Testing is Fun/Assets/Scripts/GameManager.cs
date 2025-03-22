@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     private int time = 5;
     private int powerupChoice;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (yes)
@@ -49,7 +48,6 @@ public class GameManager : MonoBehaviour
         }
      }
 
-    // Update is called once per frame
     void Update()
     {
         if (yes)

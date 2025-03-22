@@ -3,7 +3,12 @@ guid: 8f17fdf7e4513af499720fc2125342a9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - correct1: {fileID: 8300000, guid: 5bf56d7006eae19499908558b40eedbc, type: 3}
+  - boostAudio: {fileID: 8300000, guid: db507e7920d251b4c9d04e85e9ae8a43, type: 3}
+  - slowAudio: {fileID: 8300000, guid: 690fc99346418154e8f4762b3915bb1d, type: 3}
+  - scrambleAudio: {fileID: 8300000, guid: 3c01cb01f954bb1409e088efdce79e0b, type: 3}
+  - freezeAudio: {fileID: 8300000, guid: f7859670df3da9143889201cfb913ec1, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

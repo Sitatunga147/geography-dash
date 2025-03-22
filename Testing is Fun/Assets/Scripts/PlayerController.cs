@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     public int index;
     public int score = 0;
     public AudioClip correct1;
+    public AudioClip boostAudio;
+    public AudioClip slowAudio;
+    public AudioClip scrambleAudio;
+    public AudioClip freezeAudio;
     private AudioSource playerAudio;
     public int scrambledEggCookTime;
     public bool scrambled = false;
@@ -89,23 +93,27 @@ public class PlayerController : MonoBehaviour
         }
         if(collider.gameObject.CompareTag("ScrambledEggs"))
         {
+            playerAudio.PlayOneShot(scrambleAudio, 1.0f);
             player2ControllerScript.scramblered();
             Destroy(collider.gameObject);
             StartCoroutine(waitForEggs());
         }
         if (collider.gameObject.CompareTag("Boost"))
         {
+            playerAudio.PlayOneShot(boostAudio, 1.0f);
             speed += boost;
             Destroy(collider.gameObject);
             StartCoroutine(waitForBoost());
         }
         if (collider.gameObject.CompareTag("Slow"))
         {
+            playerAudio.PlayOneShot(slowAudio, 1.0f);
             player2ControllerScript.slow();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Freeze"))
         {
+            playerAudio.PlayOneShot(freezeAudio, 1.0f);
             player2ControllerScript.freeze();
             Destroy(collider.gameObject);
         }
@@ -151,7 +159,6 @@ public class PlayerController : MonoBehaviour
 
     public void scramblered()
     {
-        Debug.Log("Wassup");
         scrambled = true;
     }
 }

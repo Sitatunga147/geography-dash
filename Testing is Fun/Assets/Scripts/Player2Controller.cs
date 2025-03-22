@@ -11,7 +11,11 @@ public class Player2Controller : MonoBehaviour
     public int score = 0;
     private PlayerController playerControllerScript;
     private SpawnManager spawnManagerScript;
-    public AudioClip correct1;
+    public AudioClip correctAudio;
+    public AudioClip boostAudio;
+    public AudioClip slowAudio;
+    public AudioClip scrambleAudio;
+    public AudioClip freezeAudio;
     private AudioSource playerAudio;
     public bool scrambled = false;
     public int scrambledEggCookTime;
@@ -28,7 +32,14 @@ public class Player2Controller : MonoBehaviour
     {
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         spawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+
+        correctAudio = playerControllerScript.correct1;
+        boostAudio = playerControllerScript.boostAudio;
+        slowAudio = playerControllerScript.slowAudio;
+        scrambleAudio = playerControllerScript.scrambleAudio;
+        freezeAudio = playerControllerScript.freezeAudio;
         playerAudio = GetComponent<AudioSource>();
+
         index = Random.Range(0, playerControllerScript.countries.Length);
     }
 
@@ -82,28 +93,32 @@ public class Player2Controller : MonoBehaviour
         if (collider.gameObject == playerControllerScript.countries[index])
         {
             score += 1;
-            playerAudio.PlayOneShot(correct1, 1.0f);
+            playerAudio.PlayOneShot(correctAudio, 1.0f);
             index = Random.Range(0, playerControllerScript.countries.Length);
         }
         if (collider.gameObject.CompareTag("ScrambledEggs"))
         {
+            playerAudio.PlayOneShot(scrambleAudio, 1.0f);
             playerControllerScript.scramblered();
             Destroy(collider.gameObject);
             StartCoroutine(waitForEggs());
         }
         if (collider.gameObject.CompareTag("Boost"))
         {
+            playerAudio.PlayOneShot(boostAudio, 1.0f);
             speed += boost;
             Destroy(collider.gameObject);
             StartCoroutine(waitForBoost());
         }
         if (collider.gameObject.CompareTag("Slow"))
         {
+            playerAudio.PlayOneShot(slowAudio, 1.0f);
             playerControllerScript.slow();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Freeze"))
         {
+            playerAudio.PlayOneShot(freezeAudio, 1.0f);
             playerControllerScript.freeze();
             Destroy(collider.gameObject);
         }
