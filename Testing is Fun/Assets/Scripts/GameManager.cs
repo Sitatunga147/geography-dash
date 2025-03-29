@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
                 powerupChoice++;
             if (!scrambledEggs && powerupChoice>3)
                 powerupChoice++;
-            if (!find && powerupChoice < 4)
+            if (!find && powerupChoice > 4)
                 powerupChoice++;
             if (powerupChoice == 1)
                 spawnManagerScript.freeze();
@@ -123,15 +123,15 @@ public class GameManager : MonoBehaviour
     }
     public void Finder()
     {
-        if (find)
-            find = false;
-        else find = true;
+        if (!find)
+            find = true;
+        else find = false;
     }
     public void Glitcher()
     {
-        if (glitch)
-            glitch = false;
-        else glitch = true;
+        if (!glitch)
+            glitch = true;
+        else glitch = false;
     }
 
 

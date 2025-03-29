@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private int boostTime = 5;
     private bool isFroozen = false;
     private int freezeTime = 4;
-    private bool glitcher;
+    private bool glitcher = false;
     private int spedometer = 0;
     private int buggingTime = 5;
 
@@ -199,7 +199,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(buggingTime);
         glitcher = false;
         speed -= spedometer * boost;
-        Debug.Log(spedometer);
-        Debug.Log(speed);
+        spedometer = 0;
     }
 }
