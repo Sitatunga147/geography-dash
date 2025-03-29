@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject freezer;
+    public GameObject bugger;
     public GameObject boost;
     public GameObject slowed;
     public GameObject scrambler;
@@ -30,6 +31,7 @@ public class SpawnManager : MonoBehaviour
         GameObject[] scrambles = GameObject.FindGameObjectsWithTag("ScrambledEggs");
         setColors(scrambles, new Color(10, 0, 255));
         GameObject[] finders = GameObject.FindGameObjectsWithTag("Finder");
+        GameObject[] bugging = GameObject.FindGameObjectsWithTag("Glitch");
     }
     public void frozenPlayer()
     {
@@ -55,6 +57,11 @@ public class SpawnManager : MonoBehaviour
     public void scrambledEggs()
     {
         Instantiate(scrambler, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), scrambler.transform.rotation);
+    }
+
+    public void glitcher()
+    {
+        Instantiate(bugger, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), bugger.transform.rotation);
     }
 
     public void loadFinder()

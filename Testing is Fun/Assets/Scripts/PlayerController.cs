@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     private int boostTime = 5;
     private bool isFroozen = false;
     private int freezeTime = 4;
+    private bool glitcher;
+    private int spedometer = 0;
+    private int buggingTime = 5;
 
     private float latitudeBound = 10;
     private float longitudeBound = 5;
@@ -44,6 +47,20 @@ public class PlayerController : MonoBehaviour
         {
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");
+
+            if (glitcher)
+            {
+                if (Random.Range(0, 2) == 0)
+                {
+                    spedometer++;
+                    speed += boost;
+                }
+                else
+                {
+                    spedometer--;
+                    speed -= boost;
+                }
+            }
 
             if (scrambled)
             {
@@ -121,6 +138,11 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collider.gameObject);
         }
+        if (collider.gameObject.CompareTag("Glitch"))
+        {
+            player2ControllerScript.glitch();
+            Destroy(collider.gameObject);
+        }
     }
 
     public void freeze()
@@ -164,5 +186,20 @@ public class PlayerController : MonoBehaviour
     public void scramblered()
     {
         scrambled = true;
+    }
+
+    public void glitch()
+    {
+        StartCoroutine(deBugger());
+        glitcher = true;
+    }
+
+    IEnumerator deBugger()
+    {
+        yield return new WaitForSeconds(buggingTime);
+        glitcher = false;
+        speed -= spedometer * boost;
+        Debug.Log(spedometer);
+        Debug.Log(speed);
     }
 }

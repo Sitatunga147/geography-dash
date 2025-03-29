@@ -9,6 +9,7 @@ TagManager:
   - Slow
   - ScrambledEggs
   - Finder
+  - Glitch
   layers:
   - Default
   - TransparentFX

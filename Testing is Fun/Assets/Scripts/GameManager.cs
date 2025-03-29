@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public TMP_InputField scoreGoal;
     public static int score=0;
     public bool yes;
-    private static bool freeze = true, speed = true, slow = true, scrambledEggs = true, find = true;
+    private static bool freeze = true, speed = true, slow = true, scrambledEggs = true, find = true, glitch = true;
     private int time = 5;
     private int powerupChoice;
 
@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
             if (scrambledEggs)
                 num++;
             if (find)
+                num++;
+            if (glitch)
                 num++;
             StartCoroutine(wait(num));
         }
@@ -74,6 +76,8 @@ public class GameManager : MonoBehaviour
                 powerupChoice++;
             if (!scrambledEggs && powerupChoice>3)
                 powerupChoice++;
+            if (!find && powerupChoice < 4)
+                powerupChoice++;
             if (powerupChoice == 1)
                 spawnManagerScript.freeze();
             if (powerupChoice == 2)
@@ -84,6 +88,8 @@ public class GameManager : MonoBehaviour
                 spawnManagerScript.scrambledEggs();
             if (powerupChoice == 5)
                 spawnManagerScript.loadFinder();
+            if (powerupChoice == 6)
+                spawnManagerScript.glitcher();
         }
     }
 
@@ -120,6 +126,12 @@ public class GameManager : MonoBehaviour
         if (find)
             find = false;
         else find = true;
+    }
+    public void Glitcher()
+    {
+        if (glitch)
+            glitch = false;
+        else glitch = true;
     }
 
 
