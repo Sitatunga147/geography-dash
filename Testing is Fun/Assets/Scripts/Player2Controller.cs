@@ -122,6 +122,10 @@ public class Player2Controller : MonoBehaviour
             playerControllerScript.freeze();
             Destroy(collider.gameObject);
         }
+        if (collider.gameObject.CompareTag("Finder"))
+        {
+            Destroy(collider.gameObject);
+        }
     }
 
     public void freeze()
