@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public TMP_InputField scoreGoal;
     public static int score=0;
     public bool yes;
-    private static bool freeze = true, speed = true, slow = true, scrambledEggs = true;
+    private static bool freeze = true, speed = true, slow = true, scrambledEggs = true, find = true;
     private int time = 5;
     private int powerupChoice;
 
@@ -29,10 +29,6 @@ public class GameManager : MonoBehaviour
         if (yes)
         {
             int num = 0;
-            Debug.Log(freeze);
-            Debug.Log(speed);
-            Debug.Log(slow);
-            Debug.Log(scrambledEggs);
             playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
             player2ControllerScript = GameObject.Find("Player 2").GetComponent<Player2Controller>();
             spawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
@@ -43,6 +39,8 @@ public class GameManager : MonoBehaviour
             if (slow)
                 num++;
             if (scrambledEggs)
+                num++;
+            if (find)
                 num++;
             StartCoroutine(wait(num));
         }
@@ -68,12 +66,13 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(time);
             powerupChoice = (int)Random.Range(1, numOfPowerUp+ 1);
-            //Debug.Log(powerupChoice);
             if (!freeze)
                 powerupChoice++;
             if (!speed && powerupChoice>1)
                 powerupChoice++;
             if (!slow && powerupChoice>2)
+                powerupChoice++;
+            if (!scrambledEggs && powerupChoice>3)
                 powerupChoice++;
             if (powerupChoice == 1)
                 spawnManagerScript.freeze();
@@ -83,6 +82,8 @@ public class GameManager : MonoBehaviour
                 spawnManagerScript.slow();
             if (powerupChoice == 4)
                 spawnManagerScript.scrambledEggs();
+            if (powerupChoice == 5)
+                spawnManagerScript.loadFinder();
         }
     }
 
@@ -92,7 +93,6 @@ public class GameManager : MonoBehaviour
             freeze = false;
         else
             freeze = true;
-        Debug.Log(freeze);
     }
     public void Fast()
     {
@@ -100,7 +100,6 @@ public class GameManager : MonoBehaviour
             speed = false;
         else
             speed = true;
-        Debug.Log(speed);
     }
     public void Slow()
     {
@@ -108,7 +107,6 @@ public class GameManager : MonoBehaviour
             slow = false;
         else
             slow = true;
-        Debug.Log(slow);
     }
     public void ScrambledEggs()
     {
@@ -116,8 +114,14 @@ public class GameManager : MonoBehaviour
             scrambledEggs = true;
         else
             scrambledEggs = false;
-        Debug.Log(scrambledEggs);
     }
+    public void Finder()
+    {
+        if (find)
+            find = false;
+        else find = true;
+    }
+
 
     public void StartScene()
     {

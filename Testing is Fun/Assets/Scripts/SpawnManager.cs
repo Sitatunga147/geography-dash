@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject slowed;
     public GameObject scrambler;
     public GameObject frozen;
+    public GameObject finder;
     public GameObject player;
     public GameObject player2;
     public float lowerX;
@@ -25,11 +26,10 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         GameObject[] slows = GameObject.FindGameObjectsWithTag("Slow");
-        setColors(slows, new Color(255, 10, 0));
         GameObject[] speeds = GameObject.FindGameObjectsWithTag("Boost");
-        setColors(speeds, new Color(0, 255, 10));
         GameObject[] scrambles = GameObject.FindGameObjectsWithTag("ScrambledEggs");
         setColors(scrambles, new Color(10, 0, 255));
+        GameObject[] finders = GameObject.FindGameObjectsWithTag("Finder");
     }
     public void frozenPlayer()
     {
@@ -55,6 +55,11 @@ public class SpawnManager : MonoBehaviour
     public void scrambledEggs()
     {
         Instantiate(scrambler, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), scrambler.transform.rotation);
+    }
+
+    public void loadFinder()
+    {
+        Instantiate(finder, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), finder.transform.rotation);
     }
 
     public void setColors(GameObject[] stuffs, Color color)
