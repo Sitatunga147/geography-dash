@@ -16,6 +16,7 @@ public class Player2Controller : MonoBehaviour
     public AudioClip slowAudio;
     public AudioClip scrambleAudio;
     public AudioClip freezeAudio;
+    public AudioClip finderAudio;
     private AudioSource playerAudio;
     public bool scrambled = false;
     public int scrambledEggCookTime;
@@ -141,6 +142,7 @@ public class Player2Controller : MonoBehaviour
         }
         if (collider.gameObject.CompareTag("Finder"))
         {
+            playerAudio.PlayOneShot(finderAudio, 1.0f);
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Glitch"))

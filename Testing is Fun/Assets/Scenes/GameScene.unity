@@ -4485,6 +4485,7 @@ MonoBehaviour:
   slowAudio: {fileID: 8300000, guid: 690fc99346418154e8f4762b3915bb1d, type: 3}
   scrambleAudio: {fileID: 8300000, guid: 3c01cb01f954bb1409e088efdce79e0b, type: 3}
   freezeAudio: {fileID: 8300000, guid: f7859670df3da9143889201cfb913ec1, type: 3}
+  finderAudio: {fileID: 8300000, guid: d4ac2d43864936d4d82a5027cb250165, type: 3}
   scrambledEggCookTime: 8
   scrambled: 0
 --- !u!212 &1191272103
@@ -9393,6 +9394,7 @@ MonoBehaviour:
   slowAudio: {fileID: 0}
   scrambleAudio: {fileID: 0}
   freezeAudio: {fileID: 0}
+  finderAudio: {fileID: 8300000, guid: d4ac2d43864936d4d82a5027cb250165, type: 3}
   scrambled: 0
   scrambledEggCookTime: 8
 --- !u!1 &2137041838
