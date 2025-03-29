@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject finder;
     public GameObject player;
     public GameObject player2;
+    public GameObject beacon;
     public float lowerX;
     public float lowerY;
     public float upperX;
@@ -76,5 +77,10 @@ public class SpawnManager : MonoBehaviour
             GameObject theOneRingToRuleThemAll = stuffs[thingy];
             theOneRingToRuleThemAll.GetComponent<Renderer>().material.color = color;
         }
+    }
+
+    public void findCountry(GameObject country)
+    {
+        Instantiate(beacon, country.transform.position, country.transform.rotation);
     }
 }

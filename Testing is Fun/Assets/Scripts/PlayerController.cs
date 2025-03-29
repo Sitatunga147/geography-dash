@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip scrambleAudio;
     public AudioClip freezeAudio;
     public AudioClip finderAudio;
+    public AudioClip buggerAudio;
     private AudioSource playerAudio;
     public int scrambledEggCookTime;
     public bool scrambled = false;
@@ -138,10 +139,12 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.CompareTag("Finder"))
         {
             playerAudio.PlayOneShot(finderAudio, 1.0f);
+            searchAndRescue();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Glitch"))
         {
+            playerAudio.PlayOneShot(buggerAudio, 1.0f);
             player2ControllerScript.glitch();
             Destroy(collider.gameObject);
         }
@@ -202,5 +205,9 @@ public class PlayerController : MonoBehaviour
         glitcher = false;
         speed -= spedometer * boost;
         spedometer = 0;
+    }
+    public void searchAndRescue()
+    {
+        spawnManagerScript.findCountry(countries[index]);
     }
 }
