@@ -81,6 +81,6 @@ public class SpawnManager : MonoBehaviour
 
     public void findCountry(GameObject country)
     {
-        Instantiate(beacon, country.transform.position, country.transform.rotation);
+        Instantiate(beacon, new Vector3(country.transform.position.x + Random.Range(-.25f,.25f),country.transform.position.y + Random.Range(-.25f, .25f), 0), country.transform.rotation);
     }
 }
