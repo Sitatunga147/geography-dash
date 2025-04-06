@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        SceneManager.LoadScene(0);
         if (yes)
         {
             int num = 0;
