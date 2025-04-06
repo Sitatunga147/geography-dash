@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEditor.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,8 +18,14 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI countryTextRed;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI scoreTextRed;
-    public TMP_InputField scoreGoal;
+    public TextMeshProUGUI timerText;
+    public TMP_InputField scoreStart;
+    public TMP_InputField timerStart;
     public static int score=0;
+    public static float timeConstraint = 0;
+    public static float elapsedTime = -1;
+    private static float startingTime;
+    public bool timeUp = false;
     public bool yes;
     private static bool freeze = true, speed = true, slow = true, scrambledEggs = true, find = true, glitch = true;
     private int time = 5;
@@ -26,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        SceneManager.LoadScene(0);
         if (yes)
         {
             int num = 0;
@@ -44,7 +52,7 @@ public class GameManager : MonoBehaviour
                 num++;
             if (glitch)
                 num++;
-            StartCoroutine(wait(num));
+            StartCoroutine(Wait(num));
         }
      }
 
@@ -60,9 +68,18 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(2);
             if (player2ControllerScript.score >= score)
                 SceneManager.LoadScene(3);
+            if (timeUp && playerControllerScript.score >= player2ControllerScript.score)
+                SceneManager.LoadScene(2);
+            if (timeUp && player2ControllerScript.score > playerControllerScript.score)
+                SceneManager.LoadScene(3);
+
+            if(!timeUp && SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                RunTimer();
+            }
         }
     }
-    IEnumerator wait(int numOfPowerUp)
+    IEnumerator Wait(int numOfPowerUp)
     {
         while (numOfPowerUp>0)
         {
@@ -135,10 +152,40 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void StartScene()
+    public void StartWithScore()
     {
-        score = int.Parse(scoreGoal.text);
+        score = int.Parse(scoreStart.text);
         SceneManager.LoadScene(1);
+    }
+
+    public void StartWithTimer()
+    {
+        score = int.MaxValue;
+        timeConstraint = float.Parse(timerStart.text);
+        SceneManager.LoadScene(1);
+
+        startingTime = Time.time;
+    }
+
+    private void RunTimer()
+    {
+        float delta = Time.time - startingTime;
+        if(delta > timeConstraint*60)
+        {
+            timeUp = true;
+        }
+
+        int mins = (int)(delta / 60);
+        int secs = (int)(delta - mins*60);
+        if(secs < 10)
+        {
+            timerText.text = mins.ToString() + ":0" + secs.ToString();
+        }
+        else
+        {
+            timerText.text = mins.ToString() + ":" + secs.ToString();
+        }
+        
     }
 
     public void Home()

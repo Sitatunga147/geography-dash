@@ -53,8 +53,8 @@ public class Player2Controller : MonoBehaviour
     {
         if (!isFroozen)
         {
-            horizontalInput = Input.GetAxis("Fire1");
-            verticalInput = Input.GetAxis("Fire2");
+            horizontalInput = Input.GetAxisRaw("Fire1");
+            verticalInput = Input.GetAxisRaw("Fire2");
 
             if (glitcher)
             {
@@ -72,19 +72,19 @@ public class Player2Controller : MonoBehaviour
             if (scrambled)
             {
                 if (horizontalInput < 0)
-                    transform.Translate(Vector2.right * Time.deltaTime * -horizontalInput * speed);
+                    transform.Translate(Vector2.right * Time.smoothDeltaTime * -horizontalInput * speed);
                 if (horizontalInput > 0)
-                    transform.Translate(Vector2.up * Time.deltaTime * horizontalInput * speed);
+                    transform.Translate(Vector2.up * Time.smoothDeltaTime * horizontalInput * speed);
                 if (verticalInput > 0)
-                    transform.Translate(Vector2.down * Time.deltaTime * verticalInput * speed);
+                    transform.Translate(Vector2.down * Time.smoothDeltaTime * verticalInput * speed);
                 if (verticalInput < 0)
-                    transform.Translate(Vector2.left * Time.deltaTime * -verticalInput * speed);
+                    transform.Translate(Vector2.left * Time.smoothDeltaTime * -verticalInput * speed);
 
             }
             else
             {
-                transform.Translate(Vector2.right * Time.deltaTime * horizontalInput * speed);
-                transform.Translate(Vector2.up * Time.deltaTime * verticalInput * speed);
+                transform.Translate(Vector2.right * Time.smoothDeltaTime * horizontalInput * speed);
+                transform.Translate(Vector2.up * Time.smoothDeltaTime * verticalInput * speed);
             }
 
             if (transform.position.x > latitudeBound)
@@ -120,14 +120,14 @@ public class Player2Controller : MonoBehaviour
             playerAudio.PlayOneShot(scrambleAudio, 1.0f);
             playerControllerScript.scramblered();
             Destroy(collider.gameObject);
-            StartCoroutine(waitForEggs());
+            StartCoroutine(WaitForEggs());
         }
         if (collider.gameObject.CompareTag("Boost"))
         {
             playerAudio.PlayOneShot(boostAudio, 1.0f);
             speed += boost;
             Destroy(collider.gameObject);
-            StartCoroutine(waitForBoost());
+            StartCoroutine(WaitForBoost());
         }
         if (collider.gameObject.CompareTag("Slow"))
         {
@@ -168,25 +168,25 @@ public class Player2Controller : MonoBehaviour
         isFroozen = false;
     }
 
-    public void slow()
+    public void Slow()
     {
         speed -= boost;
-        StartCoroutine(waitForSlow());
+        StartCoroutine(WaitForSlow());
     }
 
-    IEnumerator waitForBoost()
+    IEnumerator WaitForBoost()
     {
         yield return new WaitForSeconds(boostTime);
         speed -= boost;
     }
 
-    IEnumerator waitForSlow()
+    IEnumerator WaitForSlow()
     {
         yield return new WaitForSeconds(boostTime);
         speed += boost;
     }
 
-    IEnumerator waitForEggs()
+    IEnumerator WaitForEggs()
     {
         yield return new WaitForSeconds(scrambledEggCookTime);
         playerControllerScript.scrambled = false;
@@ -199,13 +199,13 @@ public class Player2Controller : MonoBehaviour
         scrambled = true;
     }
 
-    public void glitch()
+    public void Glitch()
     {
-        StartCoroutine(deBugger());
+        StartCoroutine(DeBugger());
         glitcher = true;
     }
 
-    IEnumerator deBugger()
+    IEnumerator DeBugger()
     {
         yield return new WaitForSeconds(buggingTime);
         glitcher = false;

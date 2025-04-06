@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!isFroozen)
         {
-            horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
 
             if (glitcher)
             {
@@ -67,19 +67,19 @@ public class PlayerController : MonoBehaviour
             if (scrambled)
             {
                 if (horizontalInput < 0)
-                    transform.Translate(Vector2.right * Time.deltaTime * -horizontalInput * speed);
+                    transform.Translate(Vector2.right * Time.smoothDeltaTime * -horizontalInput * speed);
                 if (horizontalInput > 0)
-                    transform.Translate(Vector2.up * Time.deltaTime * horizontalInput * speed);
+                    transform.Translate(Vector2.up * Time.smoothDeltaTime * horizontalInput * speed);
                 if (verticalInput > 0)
-                    transform.Translate(Vector2.down * Time.deltaTime * verticalInput * speed);
+                    transform.Translate(Vector2.down * Time.smoothDeltaTime * verticalInput * speed);
                 if (verticalInput < 0)
-                    transform.Translate(Vector2.left * Time.deltaTime * -verticalInput * speed);
+                    transform.Translate(Vector2.left * Time.smoothDeltaTime * -verticalInput * speed);
 
             }
             else
             {
-                transform.Translate(Vector2.right * Time.deltaTime * horizontalInput * speed);
-                transform.Translate(Vector2.up * Time.deltaTime * verticalInput * speed);
+                transform.Translate(Vector2.right * Time.smoothDeltaTime * horizontalInput * speed);
+                transform.Translate(Vector2.up * Time.smoothDeltaTime * verticalInput * speed);
             }
 
             if (transform.position.x > latitudeBound)
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.CompareTag("Slow"))
         {
             playerAudio.PlayOneShot(slowAudio, 1.0f);
-            player2ControllerScript.slow();
+            player2ControllerScript.Slow();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Freeze"))
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.CompareTag("Glitch"))
         {
             playerAudio.PlayOneShot(buggerAudio, 1.0f);
-            player2ControllerScript.glitch();
+            player2ControllerScript.Glitch();
             Destroy(collider.gameObject);
         }
     }
