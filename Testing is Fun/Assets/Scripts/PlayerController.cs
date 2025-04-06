@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!isFroozen)
         {
-            horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
 
             if (glitcher)
             {

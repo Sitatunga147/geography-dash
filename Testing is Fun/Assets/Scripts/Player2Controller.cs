@@ -53,8 +53,8 @@ public class Player2Controller : MonoBehaviour
     {
         if (!isFroozen)
         {
-            horizontalInput = Input.GetAxis("Fire1");
-            verticalInput = Input.GetAxis("Fire2");
+            horizontalInput = Input.GetAxisRaw("Fire1");
+            verticalInput = Input.GetAxisRaw("Fire2");
 
             if (glitcher)
             {
