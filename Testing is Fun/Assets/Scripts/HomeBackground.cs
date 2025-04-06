@@ -21,7 +21,7 @@ public class HomeBackground : MonoBehaviour
             {
                 transform.SetPositionAndRotation(new Vector3(20, 0, 0), transform.rotation);
             }
-            transform.Translate(Vector2.left * Time.deltaTime * speed);
+            transform.Translate(Vector2.left * Time.smoothDeltaTime * speed);
         }
     }
 }

@@ -17,8 +17,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI countryTextRed;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI scoreTextRed;
-    public TMP_InputField scoreGoal;
+    public TMP_InputField scoreStart;
+    public TMP_InputField timerStart;
     public static int score=0;
+    public static int timeConstraint = 0;
     public bool yes;
     private static bool freeze = true, speed = true, slow = true, scrambledEggs = true, find = true, glitch = true;
     private int time = 5;
@@ -135,9 +137,16 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void StartScene()
+    public void StartWithScore()
     {
-        score = int.Parse(scoreGoal.text);
+        score = int.Parse(scoreStart.text);
+        SceneManager.LoadScene(1);
+    }
+
+    public void StartWithTimer()
+    {
+        score = int.MaxValue;
+        timeConstraint = int.Parse(timerStart.text);
         SceneManager.LoadScene(1);
     }
 
