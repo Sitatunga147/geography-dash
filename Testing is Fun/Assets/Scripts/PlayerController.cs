@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.CompareTag("Slow"))
         {
             playerAudio.PlayOneShot(slowAudio, 1.0f);
-            player2ControllerScript.slow();
+            player2ControllerScript.Slow();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Freeze"))
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.CompareTag("Glitch"))
         {
             playerAudio.PlayOneShot(buggerAudio, 1.0f);
-            player2ControllerScript.glitch();
+            player2ControllerScript.Glitch();
             Destroy(collider.gameObject);
         }
     }
