@@ -11,6 +11,7 @@ public class Player2Controller : MonoBehaviour
     public int score = 0;
     private PlayerController playerControllerScript;
     private SpawnManager spawnManagerScript;
+    private GameManager gameManagerScript;
     public AudioClip correctAudio;
     public AudioClip boostAudio;
     public AudioClip slowAudio;
@@ -20,6 +21,7 @@ public class Player2Controller : MonoBehaviour
     public AudioClip buggerAudio;
     private AudioSource playerAudio;
     public bool scrambled = false;
+    public bool doSoundEffects;
     public int scrambledEggCookTime;
     private int boost = 2;
     private int boostTime = 5;
@@ -37,8 +39,11 @@ public class Player2Controller : MonoBehaviour
     {
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         spawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        correctAudio = playerControllerScript.correct1;
+        doSoundEffects = GameManager.doSoundEffects;
+
+        correctAudio = playerControllerScript.correctAudio;
         boostAudio = playerControllerScript.boostAudio;
         slowAudio = playerControllerScript.slowAudio;
         scrambleAudio = playerControllerScript.scrambleAudio;
@@ -111,45 +116,66 @@ public class Player2Controller : MonoBehaviour
     {
         if (collider.gameObject == playerControllerScript.countries[index])
         {
+            if (doSoundEffects)
+            {
+                playerAudio.PlayOneShot(correctAudio, 1.0f);
+            }
             score += 1;
-            playerAudio.PlayOneShot(correctAudio, 1.0f);
             index = Random.Range(0, playerControllerScript.countries.Length);
         }
         if (collider.gameObject.CompareTag("ScrambledEggs"))
         {
-            playerAudio.PlayOneShot(scrambleAudio, 1.0f);
+            if (doSoundEffects)
+            {
+                playerAudio.PlayOneShot(scrambleAudio, 1.0f);
+            }
             playerControllerScript.scramblered();
             Destroy(collider.gameObject);
             StartCoroutine(WaitForEggs());
         }
         if (collider.gameObject.CompareTag("Boost"))
         {
-            playerAudio.PlayOneShot(boostAudio, 1.0f);
+            if (doSoundEffects)
+            {
+                playerAudio.PlayOneShot(boostAudio, 1.0f);
+            }
             speed += boost;
             Destroy(collider.gameObject);
             StartCoroutine(WaitForBoost());
         }
         if (collider.gameObject.CompareTag("Slow"))
         {
-            playerAudio.PlayOneShot(slowAudio, 1.0f);
+            if (doSoundEffects)
+            {
+                playerAudio.PlayOneShot(slowAudio, 1.0f);
+            }
             playerControllerScript.slow();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Freeze"))
         {
-            playerAudio.PlayOneShot(freezeAudio, 1.0f);
+            if (doSoundEffects)
+            {
+                playerAudio.PlayOneShot(freezeAudio, 1.0f);
+            }
             playerControllerScript.freeze();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Finder"))
         {
-            playerAudio.PlayOneShot(finderAudio, 1.0f);
+            if (doSoundEffects)
+            {
+                playerAudio.PlayOneShot(finderAudio, 1.0f);
+            }
             searchAndRescue();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Glitch"))
         {
-            playerAudio.PlayOneShot(buggerAudio, 1.0f);
+            if (doSoundEffects)
+            {
+                playerAudio.PlayOneShot(buggerAudio, 1.0f);
+            }
             playerControllerScript.glitch();
             Destroy(collider.gameObject);
         }

@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public bool timeUp = false;
     public bool yes;
     private static bool freeze = true, speed = true, slow = true, scrambledEggs = true, find = true, glitch = true;
+    public static bool doSoundEffects = true;
     private int time = 5;
     private int powerupChoice;
 
@@ -148,6 +149,17 @@ public class GameManager : MonoBehaviour
         if (!glitch)
             glitch = true;
         else glitch = false;
+    }
+    public void SoundEffects()
+    {
+        if (!doSoundEffects)
+        {
+            doSoundEffects = true;
+        }
+        else
+        {
+            doSoundEffects = false;
+        }
     }
 
 
