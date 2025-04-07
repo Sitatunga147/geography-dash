@@ -154,7 +154,10 @@ public class GameManager : MonoBehaviour
     public void StartWithScore()
     {
         score = int.Parse(scoreStart.text);
+        timeConstraint = float.MaxValue;
         SceneManager.LoadScene(1);
+
+        startingTime = Time.time;
     }
 
     public void StartWithTimer()
@@ -174,15 +177,18 @@ public class GameManager : MonoBehaviour
             timeUp = true;
         }
 
+        int totalMins = (int)(timeConstraint);
+        int totalSecs = (int)(60*(timeConstraint - totalMins));
+
         int mins = (int)(delta / 60);
         int secs = (int)(delta - mins*60);
-        if(secs < 10)
+        if((totalSecs - secs) < 10)
         {
-            timerText.text = mins.ToString() + ":0" + secs.ToString();
+            timerText.text = (totalMins - mins).ToString() + ":0" + (totalSecs - secs).ToString();
         }
         else
         {
-            timerText.text = mins.ToString() + ":" + secs.ToString();
+            timerText.text = (totalMins - mins).ToString() + ":" + (totalSecs - secs).ToString();
         }
         
     }
