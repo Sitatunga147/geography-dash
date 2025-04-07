@@ -183,24 +183,27 @@ public class GameManager : MonoBehaviour
 
     private void RunTimer()
     {
-        float delta = Time.time - startingTime;
-        if(delta > timeConstraint*60)
+        float deltaSeconds = Time.time - startingTime;
+        if(deltaSeconds > timeConstraint*60)
         {
             timeUp = true;
         }
 
         int totalMins = (int)(timeConstraint);
-        int totalSecs = (int)(60*(timeConstraint - totalMins));
+        int totalSecs = (int)(60*timeConstraint);
 
-        int mins = (int)(delta / 60);
-        int secs = (int)(delta - mins*60);
-        if((totalSecs - secs) < 10)
+        int secsLeft = (int)(totalSecs - deltaSeconds);
+
+        int minsLeft = (int)(secsLeft / 60);
+        int unroundedDispSecs = (int)((totalSecs - deltaSeconds)%60);
+
+        if((totalSecs - deltaSeconds)%60 < 10)
         {
-            timerText.text = (totalMins - mins).ToString() + ":0" + (totalSecs - secs).ToString();
+            timerText.text = (minsLeft).ToString() + ":0" + ((totalSecs - deltaSeconds)%60).ToString();
         }
         else
         {
-            timerText.text = (totalMins - mins).ToString() + ":" + (totalSecs - secs).ToString();
+            timerText.text = (minsLeft).ToString() + ":" + unroundedDispSecs.ToString();
         }
         
     }
