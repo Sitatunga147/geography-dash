@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(scrambleAudio, 1.0f);
+                playerAudio.PlayOneShot(scrambleAudio, 2.5f);
             }
 
             player2ControllerScript.scramblered();
@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(slowAudio, 1.0f);
+                playerAudio.PlayOneShot(slowAudio, 5.0f);
             }
 
             player2ControllerScript.Slow();
