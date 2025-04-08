@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public TMP_InputField scoreStart;
     public TMP_InputField timerStart;
     public static int score=0;
-    public static float timeConstraint = 0;
+    public static float timeConstraint = -1;
     public static float elapsedTime = -1;
     private static float startingTime;
     public bool timeUp = false;
@@ -73,7 +73,11 @@ public class GameManager : MonoBehaviour
             if (timeUp && player2ControllerScript.score > playerControllerScript.score)
                 SceneManager.LoadScene(3);
 
-            if(!timeUp && SceneManager.GetActiveScene().buildIndex == 1)
+            if(timeConstraint == -1 && SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                timerText = null;
+            }
+            else if(!timeUp && SceneManager.GetActiveScene().buildIndex == 1)
             {
                 RunTimer();
             }
@@ -166,7 +170,6 @@ public class GameManager : MonoBehaviour
     public void StartWithScore()
     {
         score = int.Parse(scoreStart.text);
-        timeConstraint = float.MaxValue;
         SceneManager.LoadScene(1);
 
         startingTime = Time.time;
