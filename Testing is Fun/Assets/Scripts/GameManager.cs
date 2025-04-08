@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
 
         if((totalSecs - deltaSeconds)%60 < 10)
         {
-            timerText.text = (minsLeft).ToString() + ":0" + ((totalSecs - deltaSeconds)%60).ToString();
+            timerText.text = (minsLeft).ToString() + ":0" + unroundedDispSecs.ToString();
         }
         else
         {
