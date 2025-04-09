@@ -127,7 +127,7 @@ public class Player2Controller : MonoBehaviour
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(scrambleAudio, 1.0f);
+                playerAudio.PlayOneShot(scrambleAudio, 2.5f);
             }
             playerControllerScript.scramblered();
             Destroy(collider.gameObject);
@@ -147,7 +147,7 @@ public class Player2Controller : MonoBehaviour
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(slowAudio, 1.0f);
+                playerAudio.PlayOneShot(slowAudio, 5.0f);
             }
             playerControllerScript.slow();
             Destroy(collider.gameObject);
