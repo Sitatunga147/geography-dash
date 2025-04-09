@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
 
             if(timeConstraint == -1 && SceneManager.GetActiveScene().buildIndex == 1)
             {
-                timerText = null;
+                timerText.text = "";
             }
             else if(!timeUp && SceneManager.GetActiveScene().buildIndex == 1)
             {
