@@ -136,32 +136,32 @@ public class GameManager : MonoBehaviour
     }
     public void ScrambledEggs()
     {
-        if (!scrambledEggs)
-            scrambledEggs = true;
-        else
+        if (scrambledEggs)
             scrambledEggs = false;
+        else
+            scrambledEggs = true;
     }
     public void Finder()
     {
-        if (!find)
-            find = true;
-        else find = false;
+        if (find)
+            find = false;
+        else find = true;
     }
     public void Glitcher()
     {
-        if (!glitch)
-            glitch = true;
-        else glitch = false;
+        if (glitch)
+            glitch = false;
+        else glitch = true;
     }
     public void SoundEffects()
     {
-        if (!doSoundEffects)
+        if (doSoundEffects)
         {
-            doSoundEffects = true;
+            doSoundEffects = false;
         }
         else
         {
-            doSoundEffects = false;
+            doSoundEffects = true;
         }
     }
 
