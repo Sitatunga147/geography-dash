@@ -213,5 +213,7 @@ public class GameManager : MonoBehaviour
     public void Home()
     {
         SceneManager.LoadScene(0);
+        timeConstraint = -1;
+        score = 0;
     }    
 }
