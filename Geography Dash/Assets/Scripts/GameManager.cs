@@ -26,13 +26,23 @@ public class GameManager : MonoBehaviour
     private static float startingTime;
     public bool timeUp = false;
     public bool yes;
-    private static bool freeze = true, speed = true, slow = true, scrambledEggs = true, find = true, glitch = true;
+    private static bool freeze, speed, slow, scrambledEggs, find, glitch;
     public static bool doSoundEffects = true;
     private int time = 5;
     private int powerupChoice;
 
     void Start()
     {
+        if (SceneManager.GetActiveScene().name.Equals("HomeScene"))
+        {
+            freeze = true;
+            speed = true;
+            slow = true;
+            scrambledEggs = true;
+            find = true;
+            glitch = true;
+        }
+
         if (yes)
         {
             int num = 0;
