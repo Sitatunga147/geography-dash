@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject freezer;
-    public GameObject bugger;
-    public GameObject boost;
-    public GameObject slowed;
-    public GameObject scrambler;
-    public GameObject frozen;
-    public GameObject finder;
+    public GameObject freezeObject;
+    public GameObject glitchObject;
+    public GameObject speedObject;
+    public GameObject slowObject;
+    public GameObject scramblerObject;
+    public GameObject frozenObject;
+    public GameObject finderObject;
     public GameObject player;
     public GameObject player2;
-    public GameObject beacon;
+    public GameObject beaconObject;
     public float lowerX;
     public float lowerY;
     public float upperX;
@@ -36,51 +36,51 @@ public class SpawnManager : MonoBehaviour
     }
     public void frozenPlayer()
     {
-        Instantiate(frozen, player.transform.position, frozen.transform.rotation);
+        Instantiate(frozenObject, player.transform.position, frozenObject.transform.rotation);
     }
     public void frozenPlayer2()
     {
-        Instantiate(frozen, player2.transform.position, frozen.transform.rotation);
+        Instantiate(frozenObject, player2.transform.position, frozenObject.transform.rotation);
     }
     public void freeze()
     {
         if(GameObject.FindGameObjectsWithTag("Freeze").Length == 1)
-            Instantiate(freezer, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), freezer.transform.rotation);
+            Instantiate(freezeObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), freezeObject.transform.rotation);
     }
     public void speed()
     {
-        Instantiate(boost, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), boost.transform.rotation);
+        Instantiate(speedObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), speedObject.transform.rotation);
     }
     public void slow()
     {
-        Instantiate(slowed, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), slowed.transform.rotation);
+        Instantiate(slowObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), slowObject.transform.rotation);
     }
     public void scrambledEggs()
     {
-        Instantiate(scrambler, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), scrambler.transform.rotation);
+        Instantiate(scramblerObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), scramblerObject.transform.rotation);
     }
 
     public void glitcher()
     {
-        Instantiate(bugger, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), bugger.transform.rotation);
+        Instantiate(glitchObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), glitchObject.transform.rotation);
     }
 
     public void loadFinder()
     {
-        Instantiate(finder, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), finder.transform.rotation);
+        Instantiate(finderObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), finderObject.transform.rotation);
     }
 
-    public void setColors(GameObject[] stuffs, Color color)
+    public void setColors(GameObject[] objArray, Color color)
     {
-        for (int thingy = 0; thingy < stuffs.Length; thingy++)
+        for (int i = 0; i < objArray.Length; i++)
         {
-            GameObject theOneRingToRuleThemAll = stuffs[thingy];
+            GameObject theOneRingToRuleThemAll = objArray[i];
             theOneRingToRuleThemAll.GetComponent<Renderer>().material.color = color;
         }
     }
 
     public void findCountry(GameObject country)
     {
-        Instantiate(beacon, new Vector3(country.transform.position.x + Random.Range(-.25f,.25f),country.transform.position.y + Random.Range(-.25f, .25f), 0), country.transform.rotation);
+        Instantiate(beaconObject, new Vector3(country.transform.position.x + Random.Range(-.25f,.25f),country.transform.position.y + Random.Range(-.25f, .25f), 0), country.transform.rotation);
     }
 }

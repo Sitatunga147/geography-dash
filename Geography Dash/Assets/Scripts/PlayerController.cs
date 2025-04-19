@@ -7,30 +7,34 @@ public class PlayerController : MonoBehaviour
     private Player2Controller player2ControllerScript;
     private SpawnManager spawnManagerScript;
     private GameManager gameManagerScript;
-    public float horizontalInput;
-    public float verticalInput;
-    private float speed = 3;
     public GameObject[] countries;
-    public int index;
-    public int score = 0;
+
     public AudioClip correctAudio;
-    public AudioClip boostAudio;
+    public AudioClip speedAudio;
     public AudioClip slowAudio;
     public AudioClip scrambleAudio;
     public AudioClip freezeAudio;
     public AudioClip finderAudio;
-    public AudioClip buggerAudio;
-    private AudioSource playerAudio;
-    public int scrambledEggCookTime;
-    public bool scrambled = false;
+    public AudioClip glitchAudio;
+    private AudioSource p2AudioSource;
+
+    public float horizontalInput;
+    public float verticalInput;
+    private float speed = 3;
+
+    public int countryI;
+    public int score = 0;
+    
+    public int scrambleDuration;
+    public bool isScrambled = false;
     public bool doSoundEffects;
-    private float boost = 2;
-    private int boostTime = 5;
-    private bool isFroozen = false;
-    private int freezeTime = 4;
-    private bool glitcher = false;
-    private int spedometer = 0;
-    private int buggingTime = 5;
+    private float speedBoost = 2;
+    private int speedDuration = 5;
+    private bool isFrozen = false;
+    private int freezeDuration = 4;
+    private bool isGlitched = false;
+    private int glitchSpeedometer = 0;
+    private int glitchDuration = 5;
 
     private float latitudeBound = 10;
     private float longitudeBound = 5;
@@ -44,33 +48,33 @@ public class PlayerController : MonoBehaviour
 
         doSoundEffects = GameManager.doSoundEffects;
 
-        index = Random.Range(0, countries.Length);
-        playerAudio = GetComponent<AudioSource>();
+        countryI = Random.Range(0, countries.Length);
+        p2AudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isFroozen)
+        if (!isFrozen)
         {
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
 
-            if (glitcher)
+            if (isGlitched)
             {
                 if (Random.Range(0, 2) == 0)
                 {
-                    spedometer++;
-                    speed += boost;
+                    glitchSpeedometer++;
+                    speed += speedBoost;
                 }
                 else
                 {
-                    spedometer--;
-                    speed -= boost;
+                    glitchSpeedometer--;
+                    speed -= speedBoost;
                 }
             }
 
-            if (scrambled)
+            if (isScrambled)
             {
                 if (horizontalInput < 0)
                     transform.Translate(Vector2.right * Time.smoothDeltaTime * -horizontalInput * speed);
@@ -110,21 +114,21 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject == countries[index])
+        if(collider.gameObject == countries[countryI])
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(correctAudio, 1.0f);
+                p2AudioSource.PlayOneShot(correctAudio, 1.0f);
             } 
 
             score += 1;
-            index = Random.Range(0, countries.Length);
+            countryI = Random.Range(0, countries.Length);
         }
         if(collider.gameObject.CompareTag("ScrambledEggs"))
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(scrambleAudio, 2.5f);
+                p2AudioSource.PlayOneShot(scrambleAudio, 2.5f);
             }
 
             player2ControllerScript.scramblered();
@@ -135,10 +139,10 @@ public class PlayerController : MonoBehaviour
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(boostAudio, 1.0f);
+                p2AudioSource.PlayOneShot(speedAudio, 1.0f);
             }
 
-            speed += boost;
+            speed += speedBoost;
             Destroy(collider.gameObject);
             StartCoroutine(waitForBoost());
         }
@@ -146,7 +150,7 @@ public class PlayerController : MonoBehaviour
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(slowAudio, 5.0f);
+                p2AudioSource.PlayOneShot(slowAudio, 5.0f);
             }
 
             player2ControllerScript.Slow();
@@ -156,7 +160,7 @@ public class PlayerController : MonoBehaviour
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(freezeAudio, 1.0f);
+                p2AudioSource.PlayOneShot(freezeAudio, 1.0f);
             }
 
             player2ControllerScript.freeze();
@@ -166,7 +170,7 @@ public class PlayerController : MonoBehaviour
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(finderAudio, 1.0f);
+                p2AudioSource.PlayOneShot(finderAudio, 1.0f);
             }
 
             searchAndRescue();
@@ -176,7 +180,7 @@ public class PlayerController : MonoBehaviour
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(buggerAudio, 1.0f);
+                p2AudioSource.PlayOneShot(glitchAudio, 1.0f);
             }
 
             player2ControllerScript.Glitch();
@@ -191,57 +195,57 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Freezing()
     {
-        isFroozen = true;
+        isFrozen = true;
         spawnManagerScript.frozenPlayer();
-        yield return new WaitForSeconds(freezeTime);
-        isFroozen = false;
+        yield return new WaitForSeconds(freezeDuration);
+        isFrozen = false;
     }
 
     public void slow()
     {
-        speed -= boost;
+        speed -= speedBoost;
         StartCoroutine(waitForSlow());
     }
 
     IEnumerator waitForBoost()
     {
-        yield return new WaitForSeconds(boostTime);
-        speed -= boost;
+        yield return new WaitForSeconds(speedDuration);
+        speed -= speedBoost;
     }
 
     IEnumerator waitForSlow()
     {
-        yield return new WaitForSeconds(boostTime);
-        speed += boost;
+        yield return new WaitForSeconds(speedDuration);
+        speed += speedBoost;
     }
 
     IEnumerator waitForEggs()
     {
-        yield return new WaitForSeconds(scrambledEggCookTime);
+        yield return new WaitForSeconds(scrambleDuration);
         player2ControllerScript.scrambled = false;
 
     }
 
     public void scramblered()
     {
-        scrambled = true;
+        isScrambled = true;
     }
 
     public void glitch()
     {
         StartCoroutine(deBugger());
-        glitcher = true;
+        isGlitched = true;
     }
 
     IEnumerator deBugger()
     {
-        yield return new WaitForSeconds(buggingTime);
-        glitcher = false;
-        speed -= spedometer * boost;
-        spedometer = 0;
+        yield return new WaitForSeconds(glitchDuration);
+        isGlitched = false;
+        speed -= glitchSpeedometer * speedBoost;
+        glitchSpeedometer = 0;
     }
     public void searchAndRescue()
     {
-        spawnManagerScript.findCountry(countries[index]);
+        spawnManagerScript.findCountry(countries[countryI]);
     }
 }

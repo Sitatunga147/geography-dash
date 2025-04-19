@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Player2Controller : MonoBehaviour
 {
-    public float horizontalInput;
-    public float verticalInput;
-    private float speed = 3;
-    public int index;
-    public int score = 0;
     private PlayerController playerControllerScript;
     private SpawnManager spawnManagerScript;
     private GameManager gameManagerScript;
@@ -20,16 +15,23 @@ public class Player2Controller : MonoBehaviour
     public AudioClip finderAudio;
     public AudioClip buggerAudio;
     private AudioSource playerAudio;
+
+    public float horizontalInput;
+    public float verticalInput;
+    private float speed = 3;
+    public int index;
+    public int score = 0;
+    
     public bool scrambled = false;
     public bool doSoundEffects;
-    public int scrambledEggCookTime;
-    private int boost = 2;
-    private int boostTime = 5;
-    private bool isFroozen = false;
-    private int freezeTime = 4;
-    private bool glitcher = false;
-    private int spedometer = 0;
-    private int buggingTime = 5;
+    public int scrambleDuration;
+    private int speedBoost = 2;
+    private int speedDuration = 5;
+    private bool isFrozen = false;
+    private int freezeDuration = 4;
+    private bool isGlitched = false;
+    private int glitchSpeedometer = 0;
+    private int glitchDuration = 5;
 
     private float latitudeBound = 10;
     private float longitudeBound = 5;
@@ -44,7 +46,7 @@ public class Player2Controller : MonoBehaviour
         doSoundEffects = GameManager.doSoundEffects;
 
         correctAudio = playerControllerScript.correctAudio;
-        boostAudio = playerControllerScript.boostAudio;
+        boostAudio = playerControllerScript.speedAudio;
         slowAudio = playerControllerScript.slowAudio;
         scrambleAudio = playerControllerScript.scrambleAudio;
         freezeAudio = playerControllerScript.freezeAudio;
@@ -56,22 +58,22 @@ public class Player2Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isFroozen)
+        if (!isFrozen)
         {
             horizontalInput = Input.GetAxisRaw("Fire1");
             verticalInput = Input.GetAxisRaw("Fire2");
 
-            if (glitcher)
+            if (isGlitched)
             {
                 if (Random.Range(0, 2) == 0)
                 {
-                    spedometer++;
-                    speed += boost;
+                    glitchSpeedometer++;
+                    speed += speedBoost;
                 }
                 else
                 {
-                    spedometer--;
-                    speed -= boost;
+                    glitchSpeedometer--;
+                    speed -= speedBoost;
                 }
             }
             if (scrambled)
@@ -139,7 +141,7 @@ public class Player2Controller : MonoBehaviour
             {
                 playerAudio.PlayOneShot(boostAudio, 1.0f);
             }
-            speed += boost;
+            speed += speedBoost;
             Destroy(collider.gameObject);
             StartCoroutine(WaitForBoost());
         }
@@ -188,34 +190,34 @@ public class Player2Controller : MonoBehaviour
 
     IEnumerator Freezing()
     {
-        isFroozen = true;
+        isFrozen = true;
         spawnManagerScript.frozenPlayer2();
-        yield return new WaitForSeconds(freezeTime);
-        isFroozen = false;
+        yield return new WaitForSeconds(freezeDuration);
+        isFrozen = false;
     }
 
     public void Slow()
     {
-        speed -= boost;
+        speed -= speedBoost;
         StartCoroutine(WaitForSlow());
     }
 
     IEnumerator WaitForBoost()
     {
-        yield return new WaitForSeconds(boostTime);
-        speed -= boost;
+        yield return new WaitForSeconds(speedDuration);
+        speed -= speedBoost;
     }
 
     IEnumerator WaitForSlow()
     {
-        yield return new WaitForSeconds(boostTime);
-        speed += boost;
+        yield return new WaitForSeconds(speedDuration);
+        speed += speedBoost;
     }
 
     IEnumerator WaitForEggs()
     {
-        yield return new WaitForSeconds(scrambledEggCookTime);
-        playerControllerScript.scrambled = false;
+        yield return new WaitForSeconds(scrambleDuration);
+        playerControllerScript.isScrambled = false;
 
     }
 
@@ -228,15 +230,15 @@ public class Player2Controller : MonoBehaviour
     public void Glitch()
     {
         StartCoroutine(DeBugger());
-        glitcher = true;
+        isGlitched = true;
     }
 
     IEnumerator DeBugger()
     {
-        yield return new WaitForSeconds(buggingTime);
-        glitcher = false;
-        speed -= spedometer * boost;
-        spedometer = 0;
+        yield return new WaitForSeconds(glitchDuration);
+        isGlitched = false;
+        speed -= glitchSpeedometer * speedBoost;
+        glitchSpeedometer = 0;
     }
 
     public void searchAndRescue()
