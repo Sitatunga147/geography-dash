@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RedWins!.unity
     guid: f244c4d26a841e54e9abd4d3637c484b
+  - enabled: 1
+    path: Assets/Scenes/Tie!.unity
+    guid: 5fe113e353a78f7448defa6d1633180b
   m_configObjects: {}
