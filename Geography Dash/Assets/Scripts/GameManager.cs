@@ -73,9 +73,9 @@ public class GameManager : MonoBehaviour
             countryTextRed.text = playerControllerScript.countries[player2ControllerScript.index].name;
             scoreText.text = "Score: " + playerControllerScript.score;
             scoreTextRed.text = "Score: " + player2ControllerScript.score;
-            if (playerControllerScript.score >= score)
+            if (playerControllerScript.score >= score && score != 0)
                 SceneManager.LoadScene(2);
-            if (player2ControllerScript.score >= score)
+            if (player2ControllerScript.score >= score && score != 0)
                 SceneManager.LoadScene(3);
             if (timeUp && playerControllerScript.score >= player2ControllerScript.score)
                 SceneManager.LoadScene(2);
