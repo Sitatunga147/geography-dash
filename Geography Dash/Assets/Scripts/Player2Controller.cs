@@ -44,7 +44,7 @@ public class Player2Controller : MonoBehaviour
         doSoundEffects = GameManager.doSoundEffects;
 
         correctAudio = playerControllerScript.correctAudio;
-        boostAudio = playerControllerScript.boostAudio;
+        boostAudio = playerControllerScript.speedAudio;
         slowAudio = playerControllerScript.slowAudio;
         scrambleAudio = playerControllerScript.scrambleAudio;
         freezeAudio = playerControllerScript.freezeAudio;
@@ -215,7 +215,7 @@ public class Player2Controller : MonoBehaviour
     IEnumerator WaitForEggs()
     {
         yield return new WaitForSeconds(scrambledEggCookTime);
-        playerControllerScript.scrambled = false;
+        playerControllerScript.isScrambled = false;
 
     }
 
