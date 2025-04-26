@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float verticalInput;
     private float speed = 3;
     public GameObject[] countries;
-    public int index;
+    public int countryIndex;
     public int score = 0;
     public AudioClip correctAudio;
     public AudioClip speedAudio;
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
         doSoundEffects = GameManager.doSoundEffects;
 
-        index = Random.Range(0, countries.Length);
+        countryIndex = Random.Range(0, countries.Length);
         playerAudio = GetComponent<AudioSource>();
     }
 
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject == countries[index])
+        if (collider.gameObject == countries[countryIndex])
         {
             if (doSoundEffects)
             {
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
             }
 
             score += 1;
-            index = Random.Range(0, countries.Length);
+            countryIndex = Random.Range(0, countries.Length);
         }
         if (collider.gameObject.CompareTag("ScrambledEggs"))
         {
@@ -217,7 +217,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator waitForEggs()
     {
         yield return new WaitForSeconds(scrambleDuration);
-        p2Controller.scrambled = false;
+        p2Controller.isScrambled = false;
 
     }
 
@@ -241,6 +241,6 @@ public class PlayerController : MonoBehaviour
     }
     public void searchAndRescue()
     {
-        spawnManager.findCountry(countries[index]);
+        spawnManager.findCountry(countries[countryIndex]);
     }
 }

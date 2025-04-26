@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour
     {
         if (yes)
         {
-            p1CountryText.text = p1Controller.countries[p1Controller.index].name;
-            p2CountryText.text = p1Controller.countries[p2Controller.index].name;
+            p1CountryText.text = p1Controller.countries[p1Controller.countryIndex].name;
+            p2CountryText.text = p1Controller.countries[p2Controller.countryIndex].name;
             p1ScoreText.text = "Score: " + p1Controller.score;
             p2ScoreText.text = "Score: " + p2Controller.score;
             if (p1Controller.score >= score && score != 0)
