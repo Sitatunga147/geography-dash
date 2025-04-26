@@ -1,32 +1,31 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
-    private PlayerController playerControllerScript;
-    private Player2Controller player2ControllerScript;
+    private PlayerController p1Controller;
+    private Player2Controller p2Controller;
     private SpawnManager spawnManagerScript;
-    public Object Freezer;
-    public Object Frozen;
-    public GameObject Boost;
-    public TextMeshProUGUI countryText;
-    public TextMeshProUGUI countryTextRed;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI scoreTextRed;
+    public Object FreezeObject;
+    public Object FrozenObject;
+    public GameObject BoostObject;
+    public TextMeshProUGUI p1CountryText;
+    public TextMeshProUGUI p2CountryText;
+    public TextMeshProUGUI p1ScoreText;
+    public TextMeshProUGUI p2ScoreText;
     public TextMeshProUGUI timerText;
     public TMP_InputField scoreStart;
     public TMP_InputField timerStart;
-    public static int score=0;
+    public static int score = 0;
     public static float timeConstraint = -1;
     public static float elapsedTime = -1;
     private static float startingTime;
     public bool timeUp = false;
     public bool yes;
-    private static bool freeze, speed, slow, scrambledEggs, find, glitch;
+    private static bool doFreeze, doSpeed, doSlow, doScramble, doFinder, doGlitch;
     public static bool doSoundEffects = true;
     private int time = 5;
     private int powerupChoice;
@@ -35,80 +34,80 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name.Equals("HomeScene"))
         {
-            freeze = true;
-            speed = true;
-            slow = true;
-            scrambledEggs = true;
-            find = true;
-            glitch = true;
+            doFreeze = true;
+            doSpeed = true;
+            doSlow = true;
+            doScramble = true;
+            doFinder = true;
+            doGlitch = true;
         }
 
         if (yes)
         {
-            int num = 0;
-            playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
-            player2ControllerScript = GameObject.Find("Player 2").GetComponent<Player2Controller>();
+            int numPowerups = 0;
+            p1Controller = GameObject.Find("Player").GetComponent<PlayerController>();
+            p2Controller = GameObject.Find("Player 2").GetComponent<Player2Controller>();
             spawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-            if (freeze)
-                num++;
-            if (speed)
-                num++;
-            if (slow)
-                num++;
-            if (scrambledEggs)
-                num++;
-            if (find)
-                num++;
-            if (glitch)
-                num++;
-            StartCoroutine(Wait(num));
+            if (doFreeze)
+                numPowerups++;
+            if (doSpeed)
+                numPowerups++;
+            if (doSlow)
+                numPowerups++;
+            if (doScramble)
+                numPowerups++;
+            if (doFinder)
+                numPowerups++;
+            if (doGlitch)
+                numPowerups++;
+            StartCoroutine(Wait(numPowerups));
         }
-     }
+    }
 
     void Update()
     {
         if (yes)
         {
-            countryText.text = playerControllerScript.countries[playerControllerScript.index].name;
-            countryTextRed.text = playerControllerScript.countries[player2ControllerScript.index].name;
-            scoreText.text = "Score: " + playerControllerScript.score;
-            scoreTextRed.text = "Score: " + player2ControllerScript.score;
-            if (playerControllerScript.score >= score && score != 0)
+            p1CountryText.text = p1Controller.countries[p1Controller.index].name;
+            p2CountryText.text = p1Controller.countries[p2Controller.index].name;
+            p1ScoreText.text = "Score: " + p1Controller.score;
+            p2ScoreText.text = "Score: " + p2Controller.score;
+            if (p1Controller.score >= score && score != 0)
                 SceneManager.LoadScene(2);
-            if (player2ControllerScript.score >= score && score != 0)
+            if (p2Controller.score >= score && score != 0)
                 SceneManager.LoadScene(3);
-            if (timeUp && playerControllerScript.score > player2ControllerScript.score)
+            if (timeUp && p1Controller.score > p2Controller.score)
                 SceneManager.LoadScene(2);
-            if (timeUp && player2ControllerScript.score > playerControllerScript.score)
+            if (timeUp && p2Controller.score > p1Controller.score)
                 SceneManager.LoadScene(3);
-            if (timeUp && playerControllerScript.score == player2ControllerScript.score)
+            if (timeUp && p1Controller.score == p2Controller.score)
                 SceneManager.LoadScene(4);
 
-            if(timeConstraint == -1 && SceneManager.GetActiveScene().buildIndex == 1)
+            if (timeConstraint == -1 && SceneManager.GetActiveScene().buildIndex == 1)
             {
                 timerText.text = "";
             }
-            else if(!timeUp && SceneManager.GetActiveScene().buildIndex == 1)
+            else if (!timeUp && SceneManager.GetActiveScene().buildIndex == 1)
             {
                 RunTimer();
             }
         }
     }
-    IEnumerator Wait(int numOfPowerUp)
+    IEnumerator Wait(int numPowerups)
     {
-        while (numOfPowerUp>0)
+        while (numPowerups > 0)
         {
             yield return new WaitForSeconds(time);
-            powerupChoice = (int)Random.Range(1, numOfPowerUp+ 1);
-            if (!freeze)
+            powerupChoice = (int)Random.Range(1, numPowerups + 1);
+            if (!doFreeze)
                 powerupChoice++;
-            if (!speed && powerupChoice>1)
+            if (!doSpeed && powerupChoice > 1)
                 powerupChoice++;
-            if (!slow && powerupChoice>2)
+            if (!doSlow && powerupChoice > 2)
                 powerupChoice++;
-            if (!scrambledEggs && powerupChoice>3)
+            if (!doScramble && powerupChoice > 3)
                 powerupChoice++;
-            if (!find && powerupChoice > 4)
+            if (!doFinder && powerupChoice > 4)
                 powerupChoice++;
             if (powerupChoice == 1)
                 spawnManagerScript.freeze();
@@ -127,43 +126,43 @@ public class GameManager : MonoBehaviour
 
     public void Freeze()
     {
-        if (freeze)
-            freeze = false;
+        if (doFreeze)
+            doFreeze = false;
         else
-            freeze = true;
+            doFreeze = true;
     }
     public void Fast()
     {
-        if (speed)
-            speed = false;
+        if (doSpeed)
+            doSpeed = false;
         else
-            speed = true;
+            doSpeed = true;
     }
     public void Slow()
     {
-        if (slow)
-            slow = false;
+        if (doSlow)
+            doSlow = false;
         else
-            slow = true;
+            doSlow = true;
     }
     public void ScrambledEggs()
     {
-        if (scrambledEggs)
-            scrambledEggs = false;
+        if (doScramble)
+            doScramble = false;
         else
-            scrambledEggs = true;
+            doScramble = true;
     }
     public void Finder()
     {
-        if (find)
-            find = false;
-        else find = true;
+        if (doFinder)
+            doFinder = false;
+        else doFinder = true;
     }
     public void Glitcher()
     {
-        if (glitch)
-            glitch = false;
-        else glitch = true;
+        if (doGlitch)
+            doGlitch = false;
+        else doGlitch = true;
     }
     public void SoundEffects()
     {
@@ -198,20 +197,19 @@ public class GameManager : MonoBehaviour
     private void RunTimer()
     {
         float deltaSeconds = Time.time - startingTime;
-        if(deltaSeconds > timeConstraint*60)
+        if (deltaSeconds > timeConstraint * 60)
         {
             timeUp = true;
         }
 
-        int totalMins = (int)(timeConstraint);
-        int totalSecs = (int)(60*timeConstraint);
+        int totalSecs = (int)(60 * timeConstraint);
 
         int secsLeft = (int)(totalSecs - deltaSeconds);
 
         int minsLeft = (int)(secsLeft / 60);
-        int unroundedDispSecs = (int)((totalSecs - deltaSeconds)%60);
+        int unroundedDispSecs = (int)((totalSecs - deltaSeconds) % 60);
 
-        if((totalSecs - deltaSeconds)%60 < 10)
+        if ((totalSecs - deltaSeconds) % 60 < 10)
         {
             timerText.text = (minsLeft).ToString() + ":0" + unroundedDispSecs.ToString();
         }
@@ -219,7 +217,7 @@ public class GameManager : MonoBehaviour
         {
             timerText.text = (minsLeft).ToString() + ":" + unroundedDispSecs.ToString();
         }
-        
+
     }
 
     public void Home()
@@ -227,5 +225,5 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
         timeConstraint = -1;
         score = 0;
-    }    
+    }
 }

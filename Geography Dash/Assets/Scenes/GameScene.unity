@@ -2702,13 +2702,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2988aa692ac065140b76f23ab4ea97b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Freezer: {fileID: 0}
-  Frozen: {fileID: 0}
-  Boost: {fileID: 0}
-  countryText: {fileID: 1450889966}
-  countryTextRed: {fileID: 2030142784}
-  scoreText: {fileID: 1681818726}
-  scoreTextRed: {fileID: 57790889}
+  FreezeObject: {fileID: 0}
+  FrozenObject: {fileID: 0}
+  BoostObject: {fileID: 0}
+  p1CountryText: {fileID: 1450889966}
+  p2CountryText: {fileID: 2030142784}
+  p1ScoreText: {fileID: 1681818726}
+  p2ScoreText: {fileID: 57790889}
   timerText: {fileID: 1265834101}
   scoreStart: {fileID: 0}
   timerStart: {fileID: 0}
