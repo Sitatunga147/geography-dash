@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public bool yes;
     private static bool freeze, speed, slow, scrambledEggs, find, glitch;
     public static bool doSoundEffects = true;
+    public static bool doSinglePlayer = true;
     private int time = 5;
     private int powerupChoice;
 
@@ -174,6 +175,17 @@ public class GameManager : MonoBehaviour
         else
         {
             doSoundEffects = true;
+        }
+    }
+    public void SinglePlayer()
+    {
+        if (doSinglePlayer)
+        {
+            doSinglePlayer = false;
+        }
+        else
+        {
+            doSinglePlayer = true;
         }
     }
 

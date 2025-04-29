@@ -12,6 +12,7 @@ public class Player2Controller : MonoBehaviour
     private PlayerController playerControllerScript;
     private SpawnManager spawnManagerScript;
     private GameManager gameManagerScript;
+    private GameObject finder;
     public AudioClip correctAudio;
     public AudioClip boostAudio;
     public AudioClip slowAudio;
@@ -21,7 +22,7 @@ public class Player2Controller : MonoBehaviour
     public AudioClip buggerAudio;
     private AudioSource playerAudio;
     public bool scrambled = false;
-    public bool doSoundEffects;
+    public bool doSoundEffects, doSinglePlayer;
     public int scrambledEggCookTime;
     private int boost = 2;
     private int boostTime = 5;
@@ -33,6 +34,12 @@ public class Player2Controller : MonoBehaviour
 
     private float latitudeBound = 10;
     private float longitudeBound = 5;
+    
+    private float AITargetX;
+    private float AITargetY;
+    private List<float> AITargetOptionsX;
+    private List<float> AITargetOptionsY;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +48,10 @@ public class Player2Controller : MonoBehaviour
         spawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
 
+        finder = GameObject.Find("Finder");
+
         doSoundEffects = GameManager.doSoundEffects;
+        doSinglePlayer = GameManager.doSinglePlayer;
 
         correctAudio = playerControllerScript.correctAudio;
         boostAudio = playerControllerScript.boostAudio;
@@ -58,8 +68,28 @@ public class Player2Controller : MonoBehaviour
     {
         if (!isFroozen)
         {
-            horizontalInput = Input.GetAxisRaw("Fire1");
-            verticalInput = Input.GetAxisRaw("Fire2");
+            if (doSinglePlayer) {
+                GenerateAITarget();
+                float cutoff = 0.5f;
+            	if (AITargetX > transform.position.x) {
+            	    horizontalInput = 1;
+            	} else if (AITargetX < transform.position.x) {
+            	    horizontalInput = -1;
+            	} else {
+            	    horizontalInput = 0;
+            	}
+                if (AITargetY > transform.position.y) {
+            	    verticalInput = 1;
+            	} else if (AITargetY < transform.position.y) {
+            	    verticalInput = -1;
+            	} else {
+            	    verticalInput = 0;
+            	}
+            }
+            else {
+                horizontalInput = Input.GetAxisRaw("Fire1");
+                verticalInput = Input.GetAxisRaw("Fire2");
+            }
 
             if (glitcher)
             {
@@ -242,5 +272,24 @@ public class Player2Controller : MonoBehaviour
     public void searchAndRescue()
     {
         spawnManagerScript.findCountry(playerControllerScript.countries[index]);
+    }
+
+    public void GenerateAITarget() {
+        // AITargetOptionsX.Clear();
+        // AITargetOptionsY.Clear();
+
+        // // random location to keep things fair for player
+        // AITargetOptionsX.Add(Random.Range(-9, 9));
+        // AITargetOptionsY.Add(Random.Range(-3, 3));
+        
+        // // true location
+        // // AITargetOptions.Add(new float[] [playerControllerScript.countries[index].transform.position.x, playerControllerScript.countries[index].transform.position.y]);
+
+        // int targetIndex = Random.Range(0, AITargetOptionsX.Count);
+        // AITargetX = AITargetOptionsX[targetIndex];
+        // AITargetY = AITargetOptionsY[targetIndex];
+
+        AITargetX = playerControllerScript.countries[index].transform.position.x;
+        AITargetY = playerControllerScript.countries[index].transform.position.y;
     }
 }
