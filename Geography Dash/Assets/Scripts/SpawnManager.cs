@@ -27,12 +27,8 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject[] slows = GameObject.FindGameObjectsWithTag("Slow");
-        GameObject[] speeds = GameObject.FindGameObjectsWithTag("Boost");
         GameObject[] scrambles = GameObject.FindGameObjectsWithTag("ScrambledEggs");
         SetColors(scrambles, new Color(10, 0, 255));
-        GameObject[] finders = GameObject.FindGameObjectsWithTag("Finder");
-        GameObject[] bugging = GameObject.FindGameObjectsWithTag("Glitch");
     }
     public void FreezeP1()
     {
@@ -44,8 +40,7 @@ public class SpawnManager : MonoBehaviour
     }
     public void InstantiateFreeze()
     {
-        if(GameObject.FindGameObjectsWithTag("Freeze").Length == 1)
-            Instantiate(FreezeObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), FreezeObject.transform.rotation);
+        Instantiate(FreezeObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), FreezeObject.transform.rotation);
     }
     public void InstantiateSpeed()
     {

@@ -16134,8 +16134,8 @@ MonoBehaviour:
   ScrambleObject: {fileID: 4599226244686252247, guid: 2f4bcbec73992234b9df84e8a25acf88, type: 3}
   FrozenObject: {fileID: 3721642984266124794, guid: 93c66dfc3ecaedb43a0ce5f4a6b8a903, type: 3}
   FinderObject: {fileID: 7149381054352002690, guid: e5fbaf4c5a70fc84d9e0f0873ec917d3, type: 3}
-  P1Object: {fileID: 0}
-  P2Object: {fileID: 0}
+  P1Object: {fileID: 1191272099}
+  P2Object: {fileID: 2127733499}
   BeaconObject: {fileID: 6000799855282957917, guid: 4d5b3860c2fd0394eab5c546da17f987, type: 3}
   lowerX: -9.5
   lowerY: -5

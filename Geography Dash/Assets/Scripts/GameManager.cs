@@ -167,13 +167,8 @@ public class GameManager : MonoBehaviour
     public void ToggleSoundEffects()
     {
         if (doSoundEffects)
-        {
             doSoundEffects = false;
-        }
-        else
-        {
-            doSoundEffects = true;
-        }
+        else doSoundEffects = true;
     }
 
 
