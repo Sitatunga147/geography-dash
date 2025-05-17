@@ -211,7 +211,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1628417913}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Slow
+        m_MethodName: ToggleSlow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1746,7 +1746,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1628417913}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Glitcher
+        m_MethodName: ToggleGlitch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2156,7 +2156,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1628417913}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ScrambledEggs
+        m_MethodName: ToggleScramble
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2564,7 +2564,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1628417913}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Freeze
+        m_MethodName: ToggleFreeze
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2951,7 +2951,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1628417913}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Finder
+        m_MethodName: ToggleFinder
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3050,7 +3050,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1628417913}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SoundEffects
+        m_MethodName: ToggleSoundEffects
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3149,7 +3149,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1628417913}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Fast
+        m_MethodName: ToggleSpeed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3839,13 +3839,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2988aa692ac065140b76f23ab4ea97b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Freezer: {fileID: 0}
-  Frozen: {fileID: 0}
-  Boost: {fileID: 0}
-  countryText: {fileID: 0}
-  countryTextRed: {fileID: 0}
-  scoreText: {fileID: 0}
-  scoreTextRed: {fileID: 0}
+  FreezeObject: {fileID: 0}
+  FrozenObject: {fileID: 0}
+  BoostObject: {fileID: 0}
+  p1CountryText: {fileID: 0}
+  p2CountryText: {fileID: 0}
+  p1ScoreText: {fileID: 0}
+  p2ScoreText: {fileID: 0}
   timerText: {fileID: 0}
   scoreStart: {fileID: 1166092966}
   timerStart: {fileID: 1051002095}

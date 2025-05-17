@@ -8,7 +8,7 @@ public class SelfDestruct : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(death());
+        StartCoroutine(Death());
     }
 
     // Update is called once per frame
@@ -17,7 +17,7 @@ public class SelfDestruct : MonoBehaviour
         
     }
 
-    IEnumerator death()
+    IEnumerator Death()
     {
         yield return new WaitForSeconds(deathTime);
         Destroy(this.gameObject);

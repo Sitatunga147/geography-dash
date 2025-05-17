@@ -110,61 +110,61 @@ public class GameManager : MonoBehaviour
             if (!doFinder && powerupChoice > 4)
                 powerupChoice++;
             if (powerupChoice == 1)
-                spawnManagerScript.freeze();
+                spawnManagerScript.InstantiateFreeze();
             if (powerupChoice == 2)
-                spawnManagerScript.speed();
+                spawnManagerScript.InstantiateSpeed();
             if (powerupChoice == 3)
-                spawnManagerScript.slow();
+                spawnManagerScript.InstantiateSlow();
             if (powerupChoice == 4)
-                spawnManagerScript.scrambledEggs();
+                spawnManagerScript.InstantiateScrambler();
             if (powerupChoice == 5)
-                spawnManagerScript.loadFinder();
+                spawnManagerScript.InstantiateFinder();
             if (powerupChoice == 6)
-                spawnManagerScript.glitcher();
+                spawnManagerScript.InstantiateGlitch();
         }
     }
 
-    public void Freeze()
+    public void ToggleFreeze()
     {
         if (doFreeze)
             doFreeze = false;
         else
             doFreeze = true;
     }
-    public void Fast()
+    public void ToggleSpeed()
     {
         if (doSpeed)
             doSpeed = false;
         else
             doSpeed = true;
     }
-    public void Slow()
+    public void ToggleSlow()
     {
         if (doSlow)
             doSlow = false;
         else
             doSlow = true;
     }
-    public void ScrambledEggs()
+    public void ToggleScramble()
     {
         if (doScramble)
             doScramble = false;
         else
             doScramble = true;
     }
-    public void Finder()
+    public void ToggleFinder()
     {
         if (doFinder)
             doFinder = false;
         else doFinder = true;
     }
-    public void Glitcher()
+    public void ToggleGlitch()
     {
         if (doGlitch)
             doGlitch = false;
         else doGlitch = true;
     }
-    public void SoundEffects()
+    public void ToggleSoundEffects()
     {
         if (doSoundEffects)
         {

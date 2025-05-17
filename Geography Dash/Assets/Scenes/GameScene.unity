@@ -9211,17 +9211,17 @@ MonoBehaviour:
   - {fileID: 1239338787}
   - {fileID: 652294209}
   - {fileID: 2069384054}
-  index: 0
+  countryIndex: 0
   score: 0
   correctAudio: {fileID: 8300000, guid: 5bf56d7006eae19499908558b40eedbc, type: 3}
-  boostAudio: {fileID: 8300000, guid: db507e7920d251b4c9d04e85e9ae8a43, type: 3}
+  speedAudio: {fileID: 8300000, guid: db507e7920d251b4c9d04e85e9ae8a43, type: 3}
   slowAudio: {fileID: 8300000, guid: 690fc99346418154e8f4762b3915bb1d, type: 3}
   scrambleAudio: {fileID: 8300000, guid: 3c01cb01f954bb1409e088efdce79e0b, type: 3}
   freezeAudio: {fileID: 8300000, guid: f7859670df3da9143889201cfb913ec1, type: 3}
   finderAudio: {fileID: 8300000, guid: d4ac2d43864936d4d82a5027cb250165, type: 3}
-  buggerAudio: {fileID: 8300000, guid: d14e05720ca307f4cb912dc283054a85, type: 3}
-  scrambledEggCookTime: 8
-  scrambled: 0
+  glitchAudio: {fileID: 8300000, guid: d14e05720ca307f4cb912dc283054a85, type: 3}
+  scrambleDuration: 0
+  isScrambled: 0
   doSoundEffects: 0
 --- !u!212 &1191272103
 SpriteRenderer:
@@ -16127,16 +16127,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d33e13a3bbf188498212f459347a648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezer: {fileID: 6146197687324901837, guid: 810c88cacddce2c4c9c8176683ff7187, type: 3}
-  bugger: {fileID: 5263297107900925747, guid: 0e047c4ac07dde54498a6d0712a53aef, type: 3}
-  boost: {fileID: 7867881308823450106, guid: d25478109dcf9e94facbb63b59ca84aa, type: 3}
-  slowed: {fileID: 4302310157351844424, guid: 7c8f49342d1b2bd418516e1263592846, type: 3}
-  scrambler: {fileID: 4599226244686252247, guid: 2f4bcbec73992234b9df84e8a25acf88, type: 3}
-  frozen: {fileID: 3721642984266124794, guid: 93c66dfc3ecaedb43a0ce5f4a6b8a903, type: 3}
-  finder: {fileID: 7149381054352002690, guid: e5fbaf4c5a70fc84d9e0f0873ec917d3, type: 3}
-  player: {fileID: 1191272099}
-  player2: {fileID: 2127733499}
-  beacon: {fileID: 6000799855282957917, guid: 4d5b3860c2fd0394eab5c546da17f987, type: 3}
+  FreezeObject: {fileID: 6146197687324901837, guid: 810c88cacddce2c4c9c8176683ff7187, type: 3}
+  GlitchObject: {fileID: 5263297107900925747, guid: 0e047c4ac07dde54498a6d0712a53aef, type: 3}
+  SpeedObject: {fileID: 7867881308823450106, guid: d25478109dcf9e94facbb63b59ca84aa, type: 3}
+  SlowObject: {fileID: 4302310157351844424, guid: 7c8f49342d1b2bd418516e1263592846, type: 3}
+  ScrambleObject: {fileID: 4599226244686252247, guid: 2f4bcbec73992234b9df84e8a25acf88, type: 3}
+  FrozenObject: {fileID: 3721642984266124794, guid: 93c66dfc3ecaedb43a0ce5f4a6b8a903, type: 3}
+  FinderObject: {fileID: 7149381054352002690, guid: e5fbaf4c5a70fc84d9e0f0873ec917d3, type: 3}
+  P1Object: {fileID: 0}
+  P2Object: {fileID: 0}
+  BeaconObject: {fileID: 6000799855282957917, guid: 4d5b3860c2fd0394eab5c546da17f987, type: 3}
   lowerX: -9.5
   lowerY: -5
   upperX: 9.5
@@ -18182,18 +18182,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInput: 0
   verticalInput: 0
-  index: 0
+  countryIndex: 0
   score: 0
   correctAudio: {fileID: 8300000, guid: 5bf56d7006eae19499908558b40eedbc, type: 3}
-  boostAudio: {fileID: 8300000, guid: db507e7920d251b4c9d04e85e9ae8a43, type: 3}
+  speedAudio: {fileID: 0}
   slowAudio: {fileID: 8300000, guid: 690fc99346418154e8f4762b3915bb1d, type: 3}
   scrambleAudio: {fileID: 8300000, guid: 3c01cb01f954bb1409e088efdce79e0b, type: 3}
   freezeAudio: {fileID: 8300000, guid: f7859670df3da9143889201cfb913ec1, type: 3}
   finderAudio: {fileID: 8300000, guid: d4ac2d43864936d4d82a5027cb250165, type: 3}
-  buggerAudio: {fileID: 8300000, guid: d14e05720ca307f4cb912dc283054a85, type: 3}
-  scrambled: 0
+  glitchAudio: {fileID: 0}
+  isScrambled: 0
   doSoundEffects: 0
-  scrambledEggCookTime: 8
+  scrambleDuration: 0
 --- !u!1 &2137041838
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,47 +30,47 @@ public class SpawnManager : MonoBehaviour
         GameObject[] slows = GameObject.FindGameObjectsWithTag("Slow");
         GameObject[] speeds = GameObject.FindGameObjectsWithTag("Boost");
         GameObject[] scrambles = GameObject.FindGameObjectsWithTag("ScrambledEggs");
-        setColors(scrambles, new Color(10, 0, 255));
+        SetColors(scrambles, new Color(10, 0, 255));
         GameObject[] finders = GameObject.FindGameObjectsWithTag("Finder");
         GameObject[] bugging = GameObject.FindGameObjectsWithTag("Glitch");
     }
-    public void frozenPlayer()
+    public void FreezeP1()
     {
         Instantiate(FrozenObject, P1Object.transform.position, FrozenObject.transform.rotation);
     }
-    public void frozenPlayer2()
+    public void FreezeP2()
     {
         Instantiate(FrozenObject, P2Object.transform.position, FrozenObject.transform.rotation);
     }
-    public void freeze()
+    public void InstantiateFreeze()
     {
         if(GameObject.FindGameObjectsWithTag("Freeze").Length == 1)
             Instantiate(FreezeObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), FreezeObject.transform.rotation);
     }
-    public void speed()
+    public void InstantiateSpeed()
     {
         Instantiate(SpeedObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), SpeedObject.transform.rotation);
     }
-    public void slow()
+    public void InstantiateSlow()
     {
         Instantiate(SlowObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), SlowObject.transform.rotation);
     }
-    public void scrambledEggs()
+    public void InstantiateScrambler()
     {
         Instantiate(ScrambleObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), ScrambleObject.transform.rotation);
     }
 
-    public void glitcher()
+    public void InstantiateGlitch()
     {
         Instantiate(GlitchObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), GlitchObject.transform.rotation);
     }
 
-    public void loadFinder()
+    public void InstantiateFinder()
     {
         Instantiate(FinderObject, new Vector3(Random.Range(lowerX, upperX), Random.Range(lowerY, upperY), 0), FinderObject.transform.rotation);
     }
 
-    public void setColors(GameObject[] objectArray, Color color)
+    public void SetColors(GameObject[] objectArray, Color color)
     {
         for (int i = 0; i < objectArray.Length; i++)
         {
@@ -79,7 +79,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void findCountry(GameObject country)
+    public void InstantiateBeacon(GameObject country)
     {
         Instantiate(BeaconObject, new Vector3(country.transform.position.x + Random.Range(-.25f,.25f),country.transform.position.y + Random.Range(-.25f, .25f), 0), country.transform.rotation);
     }

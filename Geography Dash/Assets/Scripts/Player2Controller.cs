@@ -128,9 +128,9 @@ public class Player2Controller : MonoBehaviour
             {
                 playerAudio.PlayOneShot(scrambleAudio, 2.5f);
             }
-            playerControllerScript.scramblered();
+            playerControllerScript.DoScrambler();
             Destroy(collider.gameObject);
-            StartCoroutine(WaitForEggs());
+            StartCoroutine(AwaitScramblerEnd());
         }
         if (collider.gameObject.CompareTag("Boost"))
         {
@@ -140,7 +140,7 @@ public class Player2Controller : MonoBehaviour
             }
             speed += speedBoost;
             Destroy(collider.gameObject);
-            StartCoroutine(WaitForBoost());
+            StartCoroutine(AwaitSpeedEnd());
         }
         if (collider.gameObject.CompareTag("Slow"))
         {
@@ -148,7 +148,7 @@ public class Player2Controller : MonoBehaviour
             {
                 playerAudio.PlayOneShot(slowAudio, 5.0f);
             }
-            playerControllerScript.slow();
+            playerControllerScript.DoSlow();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Freeze"))
@@ -157,7 +157,7 @@ public class Player2Controller : MonoBehaviour
             {
                 playerAudio.PlayOneShot(freezeAudio, 1.0f);
             }
-            playerControllerScript.freeze();
+            playerControllerScript.DoFreeze();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Finder"))
@@ -166,7 +166,7 @@ public class Player2Controller : MonoBehaviour
             {
                 playerAudio.PlayOneShot(finderAudio, 1.0f);
             }
-            searchAndRescue();
+            DoFinder();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Glitch"))
@@ -175,12 +175,12 @@ public class Player2Controller : MonoBehaviour
             {
                 playerAudio.PlayOneShot(glitchAudio, 1.0f);
             }
-            playerControllerScript.glitch();
+            playerControllerScript.DoGlitch();
             Destroy(collider.gameObject);
         }
     }
 
-    public void freeze()
+    public void DoFreeze()
     {
         StartCoroutine(Freezing());
     }
@@ -188,48 +188,48 @@ public class Player2Controller : MonoBehaviour
     IEnumerator Freezing()
     {
         isFrozen = true;
-        spawnManagerScript.frozenPlayer2();
+        spawnManagerScript.FreezeP2();
         yield return new WaitForSeconds(freezeDuration);
         isFrozen = false;
     }
 
-    public void Slow()
+    public void DoSlow()
     {
         speed -= speedBoost;
-        StartCoroutine(WaitForSlow());
+        StartCoroutine(AwaitSlowEnd());
     }
 
-    IEnumerator WaitForBoost()
+    IEnumerator AwaitSpeedEnd()
     {
         yield return new WaitForSeconds(speedDuration);
         speed -= speedBoost;
     }
 
-    IEnumerator WaitForSlow()
+    IEnumerator AwaitSlowEnd()
     {
         yield return new WaitForSeconds(speedDuration);
         speed += speedBoost;
     }
 
-    IEnumerator WaitForEggs()
+    IEnumerator AwaitScramblerEnd()
     {
         yield return new WaitForSeconds(scrambleDuration);
         playerControllerScript.isScrambled = false;
 
     }
 
-    public void scramblered()
+    public void DoScrambler()
     {
         isScrambled = true;
     }
 
     public void Glitch()
     {
-        StartCoroutine(DeBugger());
+        StartCoroutine(AwaitGlitchEnd());
         isGlitched = true;
     }
 
-    IEnumerator DeBugger()
+    IEnumerator AwaitGlitchEnd()
     {
         yield return new WaitForSeconds(glitchDuration);
         isGlitched = false;
@@ -237,8 +237,8 @@ public class Player2Controller : MonoBehaviour
         glitchSpeedometer = 0;
     }
 
-    public void searchAndRescue()
+    public void DoFinder()
     {
-        spawnManagerScript.findCountry(playerControllerScript.countries[countryIndex]);
+        spawnManagerScript.InstantiateBeacon(playerControllerScript.countries[countryIndex]);
     }
 }

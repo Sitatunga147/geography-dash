@@ -126,9 +126,9 @@ public class PlayerController : MonoBehaviour
                 playerAudio.PlayOneShot(scrambleAudio, 2.5f);
             }
 
-            p2Controller.scramblered();
+            p2Controller.DoScrambler();
             Destroy(collider.gameObject);
-            StartCoroutine(waitForEggs());
+            StartCoroutine(AwaitScramblerEnd());
         }
         if (collider.gameObject.CompareTag("Boost"))
         {
@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
 
             speed += speedBoost;
             Destroy(collider.gameObject);
-            StartCoroutine(waitForBoost());
+            StartCoroutine(AwaitSpeedEnd());
         }
         if (collider.gameObject.CompareTag("Slow"))
         {
@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
                 playerAudio.PlayOneShot(slowAudio, 5.0f);
             }
 
-            p2Controller.Slow();
+            p2Controller.DoSlow();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Freeze"))
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
                 playerAudio.PlayOneShot(freezeAudio, 1.0f);
             }
 
-            p2Controller.freeze();
+            p2Controller.DoFreeze();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Finder"))
@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
                 playerAudio.PlayOneShot(finderAudio, 1.0f);
             }
 
-            searchAndRescue();
+            DoFinder();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Glitch"))
@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void freeze()
+    public void DoFreeze()
     {
         StartCoroutine(Freezing());
     }
@@ -191,56 +191,56 @@ public class PlayerController : MonoBehaviour
     IEnumerator Freezing()
     {
         isFrozen = true;
-        spawnManager.frozenPlayer();
+        spawnManager.FreezeP1();
         yield return new WaitForSeconds(freezeDuration);
         isFrozen = false;
     }
 
-    public void slow()
+    public void DoSlow()
     {
         speed -= speedBoost;
-        StartCoroutine(waitForSlow());
+        StartCoroutine(AwaitSlowEnd());
     }
 
-    IEnumerator waitForBoost()
+    IEnumerator AwaitSpeedEnd()
     {
         yield return new WaitForSeconds(speedDuration);
         speed -= speedBoost;
     }
 
-    IEnumerator waitForSlow()
+    IEnumerator AwaitSlowEnd()
     {
         yield return new WaitForSeconds(speedDuration);
         speed += speedBoost;
     }
 
-    IEnumerator waitForEggs()
+    IEnumerator AwaitScramblerEnd()
     {
         yield return new WaitForSeconds(scrambleDuration);
         p2Controller.isScrambled = false;
 
     }
 
-    public void scramblered()
+    public void DoScrambler()
     {
         isScrambled = true;
     }
 
-    public void glitch()
+    public void DoGlitch()
     {
-        StartCoroutine(deBugger());
+        StartCoroutine(AwaitGlitchEnd());
         isGlitched = true;
     }
 
-    IEnumerator deBugger()
+    IEnumerator AwaitGlitchEnd()
     {
         yield return new WaitForSeconds(glitchDuration);
         isGlitched = false;
         speed -= glitchSpeedometer * speedBoost;
         glitchSpeedometer = 0;
     }
-    public void searchAndRescue()
+    public void DoFinder()
     {
-        spawnManager.findCountry(countries[countryIndex]);
+        spawnManager.InstantiateBeacon(countries[countryIndex]);
     }
 }
