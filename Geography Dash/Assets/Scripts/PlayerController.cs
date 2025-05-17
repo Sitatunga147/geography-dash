@@ -5,7 +5,6 @@ public class PlayerController : MonoBehaviour
 {
     private Player2Controller p2Controller;
     private SpawnManager spawnManager;
-    private GameManager gameManager;
     public float horizontalInput;
     public float verticalInput;
     private float speed = 3;
@@ -39,7 +38,6 @@ public class PlayerController : MonoBehaviour
     {
         p2Controller = GameObject.Find("Player 2").GetComponent<Player2Controller>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         doSoundEffects = GameManager.doSoundEffects;
 

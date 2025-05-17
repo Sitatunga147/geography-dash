@@ -10,7 +10,6 @@ public class Player2Controller : MonoBehaviour
     public int score = 0;
     private PlayerController playerControllerScript;
     private SpawnManager spawnManagerScript;
-    private GameManager gameManagerScript;
     public AudioClip correctAudio;
     public AudioClip speedAudio;
     public AudioClip slowAudio;
@@ -38,7 +37,6 @@ public class Player2Controller : MonoBehaviour
     {
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         spawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         doSoundEffects = GameManager.doSoundEffects;
 
