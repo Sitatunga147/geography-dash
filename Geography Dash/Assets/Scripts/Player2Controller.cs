@@ -69,6 +69,7 @@ public class Player2Controller : MonoBehaviour
         if (!isFroozen)
         {
             if (doSinglePlayer) {
+                speed = 2;
                 GenerateAITarget();
                 float cutoff = 0.5f;
             	if (AITargetX > transform.position.x) {
