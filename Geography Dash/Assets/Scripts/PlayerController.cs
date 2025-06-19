@@ -1,36 +1,34 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Player2Controller player2ControllerScript;
-    private SpawnManager spawnManagerScript;
-    private GameManager gameManagerScript;
+    private Player2Controller p2Controller;
+    private SpawnManager spawnManager;
     public float horizontalInput;
     public float verticalInput;
     private float speed = 3;
     public GameObject[] countries;
-    public int index;
+    public int countryIndex;
     public int score = 0;
     public AudioClip correctAudio;
-    public AudioClip boostAudio;
+    public AudioClip speedAudio;
     public AudioClip slowAudio;
     public AudioClip scrambleAudio;
     public AudioClip freezeAudio;
     public AudioClip finderAudio;
-    public AudioClip buggerAudio;
+    public AudioClip glitchAudio;
     private AudioSource playerAudio;
-    public int scrambledEggCookTime;
-    public bool scrambled = false;
+    public int scrambleDuration;
+    public bool isScrambled = false;
     public bool doSoundEffects;
-    private float boost = 2;
-    private int boostTime = 5;
-    private bool isFroozen = false;
-    private int freezeTime = 4;
-    private bool glitcher = false;
-    private int spedometer = 0;
-    private int buggingTime = 5;
+    private float speedBoost = 2;
+    private int speedDuration = 5;
+    private bool isFrozen = false;
+    private int freezeDuration = 4;
+    private bool isGlitched = false;
+    private int glitchSpeedometer = 0;
+    private int glitchDuration = 5;
 
     private float latitudeBound = 10;
     private float longitudeBound = 5;
@@ -38,39 +36,38 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player2ControllerScript = GameObject.Find("Player 2").GetComponent<Player2Controller>();
-        spawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
+        p2Controller = GameObject.Find("Player 2").GetComponent<Player2Controller>();
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
         doSoundEffects = GameManager.doSoundEffects;
 
-        index = Random.Range(0, countries.Length);
+        countryIndex = Random.Range(0, countries.Length);
         playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isFroozen)
+        if (!isFrozen)
         {
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
 
-            if (glitcher)
+            if (isGlitched)
             {
                 if (Random.Range(0, 2) == 0)
                 {
-                    spedometer++;
-                    speed += boost;
+                    glitchSpeedometer++;
+                    speed += speedBoost;
                 }
                 else
                 {
-                    spedometer--;
-                    speed -= boost;
+                    glitchSpeedometer--;
+                    speed -= speedBoost;
                 }
             }
 
-            if (scrambled)
+            if (isScrambled)
             {
                 if (horizontalInput < 0)
                     transform.Translate(Vector2.right * Time.smoothDeltaTime * -horizontalInput * speed);
@@ -110,37 +107,37 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject == countries[index])
+        if (collider.gameObject == countries[countryIndex])
         {
             if (doSoundEffects)
             {
                 playerAudio.PlayOneShot(correctAudio, 1.0f);
-            } 
+            }
 
             score += 1;
-            index = Random.Range(0, countries.Length);
+            countryIndex = Random.Range(0, countries.Length);
         }
-        if(collider.gameObject.CompareTag("ScrambledEggs"))
+        if (collider.gameObject.CompareTag("ScrambledEggs"))
         {
             if (doSoundEffects)
             {
                 playerAudio.PlayOneShot(scrambleAudio, 2.5f);
             }
 
-            player2ControllerScript.scramblered();
+            p2Controller.DoScrambler();
             Destroy(collider.gameObject);
-            StartCoroutine(waitForEggs());
+            StartCoroutine(AwaitScramblerEnd());
         }
         if (collider.gameObject.CompareTag("Boost"))
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(boostAudio, 1.0f);
+                playerAudio.PlayOneShot(speedAudio, 1.0f);
             }
 
-            speed += boost;
+            speed += speedBoost;
             Destroy(collider.gameObject);
-            StartCoroutine(waitForBoost());
+            StartCoroutine(AwaitSpeedEnd());
         }
         if (collider.gameObject.CompareTag("Slow"))
         {
@@ -149,7 +146,7 @@ public class PlayerController : MonoBehaviour
                 playerAudio.PlayOneShot(slowAudio, 5.0f);
             }
 
-            player2ControllerScript.Slow();
+            p2Controller.DoSlow();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Freeze"))
@@ -159,7 +156,7 @@ public class PlayerController : MonoBehaviour
                 playerAudio.PlayOneShot(freezeAudio, 1.0f);
             }
 
-            player2ControllerScript.freeze();
+            p2Controller.DoFreeze();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Finder"))
@@ -169,79 +166,79 @@ public class PlayerController : MonoBehaviour
                 playerAudio.PlayOneShot(finderAudio, 1.0f);
             }
 
-            searchAndRescue();
+            DoFinder();
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.CompareTag("Glitch"))
         {
             if (doSoundEffects)
             {
-                playerAudio.PlayOneShot(buggerAudio, 1.0f);
+                playerAudio.PlayOneShot(glitchAudio, 1.0f);
             }
 
-            player2ControllerScript.Glitch();
+            p2Controller.Glitch();
             Destroy(collider.gameObject);
         }
     }
 
-    public void freeze()
+    public void DoFreeze()
     {
         StartCoroutine(Freezing());
     }
 
     IEnumerator Freezing()
     {
-        isFroozen = true;
-        spawnManagerScript.frozenPlayer();
-        yield return new WaitForSeconds(freezeTime);
-        isFroozen = false;
+        isFrozen = true;
+        spawnManager.FreezeP1();
+        yield return new WaitForSeconds(freezeDuration);
+        isFrozen = false;
     }
 
-    public void slow()
+    public void DoSlow()
     {
-        speed -= boost;
-        StartCoroutine(waitForSlow());
+        speed -= speedBoost;
+        StartCoroutine(AwaitSlowEnd());
     }
 
-    IEnumerator waitForBoost()
+    IEnumerator AwaitSpeedEnd()
     {
-        yield return new WaitForSeconds(boostTime);
-        speed -= boost;
+        yield return new WaitForSeconds(speedDuration);
+        speed -= speedBoost;
     }
 
-    IEnumerator waitForSlow()
+    IEnumerator AwaitSlowEnd()
     {
-        yield return new WaitForSeconds(boostTime);
-        speed += boost;
+        yield return new WaitForSeconds(speedDuration);
+        speed += speedBoost;
     }
 
-    IEnumerator waitForEggs()
+    IEnumerator AwaitScramblerEnd()
     {
-        yield return new WaitForSeconds(scrambledEggCookTime);
-        player2ControllerScript.scrambled = false;
+        yield return new WaitForSeconds(scrambleDuration);
+        p2Controller.isScrambled = false;
 
     }
 
-    public void scramblered()
+    public void DoScrambler()
     {
-        scrambled = true;
+        isScrambled = true;
     }
 
-    public void glitch()
+    public void DoGlitch()
     {
-        StartCoroutine(deBugger());
-        glitcher = true;
+        StartCoroutine(AwaitGlitchEnd());
+        isGlitched = true;
     }
 
-    IEnumerator deBugger()
+    IEnumerator AwaitGlitchEnd()
     {
-        yield return new WaitForSeconds(buggingTime);
-        glitcher = false;
-        speed -= spedometer * boost;
-        spedometer = 0;
+        yield return new WaitForSeconds(glitchDuration);
+        isGlitched = false;
+        speed -= glitchSpeedometer * speedBoost;
+        glitchSpeedometer = 0;
     }
-    public void searchAndRescue()
+    public void DoFinder()
     {
-        spawnManagerScript.findCountry(countries[index]);
+        spawnManager.InstantiateBeacon(countries[countryIndex]);
     }
 }
