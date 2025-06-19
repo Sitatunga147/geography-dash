@@ -10,6 +10,8 @@ public class Player2Controller : MonoBehaviour
     public int score = 0;
     private PlayerController playerControllerScript;
     private SpawnManager spawnManagerScript;
+    private GameManager gameManagerScript;
+    private GameObject finder;
     public AudioClip correctAudio;
     public AudioClip speedAudio;
     public AudioClip slowAudio;
@@ -18,8 +20,20 @@ public class Player2Controller : MonoBehaviour
     public AudioClip finderAudio;
     public AudioClip glitchAudio;
     private AudioSource playerAudio;
+
+//     public bool scrambled = false;
+//     public bool doSoundEffects, doSinglePlayer;
+//     public int scrambledEggCookTime;
+//     private int boost = 2;
+//     private int boostTime = 5;
+//     private bool isFroozen = false;
+//     private int freezeTime = 4;
+//     private bool glitcher = false;
+//     private int spedometer = 0;
+//     private int buggingTime = 5;
+
     public bool isScrambled = false;
-    public bool doSoundEffects;
+    public bool doSoundEffects, doSinglePlayer;
     public int scrambleDuration;
     private int speedBoost = 2;
     private int speedDuration = 5;
@@ -31,6 +45,12 @@ public class Player2Controller : MonoBehaviour
 
     private float latitudeBound = 10;
     private float longitudeBound = 5;
+    
+    private float AITargetX;
+    private float AITargetY;
+    private List<float> AITargetOptionsX;
+    private List<float> AITargetOptionsY;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +58,10 @@ public class Player2Controller : MonoBehaviour
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         spawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
+        finder = GameObject.Find("Finder");
+
         doSoundEffects = GameManager.doSoundEffects;
+        doSinglePlayer = GameManager.doSinglePlayer;
 
         correctAudio = playerControllerScript.correctAudio;
         speedAudio = playerControllerScript.speedAudio;
@@ -55,8 +78,29 @@ public class Player2Controller : MonoBehaviour
     {
         if (!isFrozen)
         {
-            horizontalInput = Input.GetAxisRaw("Fire1");
-            verticalInput = Input.GetAxisRaw("Fire2");
+            if (doSinglePlayer) {
+                speed = 2;
+                GenerateAITarget();
+                float cutoff = 0.5f;
+            	if (AITargetX > transform.position.x) {
+            	    horizontalInput = 1;
+            	} else if (AITargetX < transform.position.x) {
+            	    horizontalInput = -1;
+            	} else {
+            	    horizontalInput = 0;
+            	}
+                if (AITargetY > transform.position.y) {
+            	    verticalInput = 1;
+            	} else if (AITargetY < transform.position.y) {
+            	    verticalInput = -1;
+            	} else {
+            	    verticalInput = 0;
+            	}
+            }
+            else {
+                horizontalInput = Input.GetAxisRaw("Fire1");
+                verticalInput = Input.GetAxisRaw("Fire2");
+            }
 
             if (isGlitched)
             {
@@ -238,5 +282,24 @@ public class Player2Controller : MonoBehaviour
     public void DoFinder()
     {
         spawnManagerScript.InstantiateBeacon(playerControllerScript.countries[countryIndex]);
+    }
+
+    public void GenerateAITarget() {
+        // AITargetOptionsX.Clear();
+        // AITargetOptionsY.Clear();
+
+        // // random location to keep things fair for player
+        // AITargetOptionsX.Add(Random.Range(-9, 9));
+        // AITargetOptionsY.Add(Random.Range(-3, 3));
+        
+        // // true location
+        // // AITargetOptions.Add(new float[] [playerControllerScript.countries[index].transform.position.x, playerControllerScript.countries[index].transform.position.y]);
+
+        // int targetIndex = Random.Range(0, AITargetOptionsX.Count);
+        // AITargetX = AITargetOptionsX[targetIndex];
+        // AITargetY = AITargetOptionsY[targetIndex];
+
+        AITargetX = playerControllerScript.countries[index].transform.position.x;
+        AITargetY = playerControllerScript.countries[index].transform.position.y;
     }
 }

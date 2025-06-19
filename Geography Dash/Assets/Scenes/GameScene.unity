@@ -18193,6 +18193,7 @@ MonoBehaviour:
   glitchAudio: {fileID: 0}
   isScrambled: 0
   doSoundEffects: 0
+  doSinglePlayer: 0
   scrambleDuration: 0
 --- !u!1 &2137041838
 GameObject:
@@ -18456,6 +18457,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7149381054352002690, guid: e5fbaf4c5a70fc84d9e0f0873ec917d3, type: 3}
       propertyPath: m_Name
+      value: Finder
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149381054352002690, guid: e5fbaf4c5a70fc84d9e0f0873ec917d3, type: 3}
+      propertyPath: m_TagString
       value: Finder
       objectReference: {fileID: 0}
     - target: {fileID: 7529003298339116088, guid: e5fbaf4c5a70fc84d9e0f0873ec917d3, type: 3}
