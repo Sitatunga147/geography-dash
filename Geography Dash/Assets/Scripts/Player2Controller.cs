@@ -6,8 +6,11 @@ public class Player2Controller : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
     private float speed = 3;
+
     public int countryIndex;
+    public int lastCountryIndex;
     public int score = 0;
+
     private PlayerController playerControllerScript;
     private SpawnManager spawnManagerScript;
     private GameManager gameManagerScript;
@@ -70,6 +73,7 @@ public class Player2Controller : MonoBehaviour
         freezeAudio = playerControllerScript.freezeAudio;
         playerAudio = GetComponent<AudioSource>();
 
+        lastCountryIndex = -1;
         countryIndex = Random.Range(0, playerControllerScript.countries.Length);
     }
 
@@ -162,7 +166,11 @@ public class Player2Controller : MonoBehaviour
                 playerAudio.PlayOneShot(correctAudio, 1.0f);
             }
             score += 1;
-            countryIndex = Random.Range(0, playerControllerScript.countries.Length);
+            lastCountryIndex = countryIndex;
+            while(countryIndex == lastCountryIndex)
+            {
+                countryIndex = Random.Range(0, playerControllerScript.countries.Length);
+            }
         }
         if (collider.gameObject.CompareTag("ScrambledEggs"))
         {
