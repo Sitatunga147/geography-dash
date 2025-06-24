@@ -24,17 +24,6 @@ public class Player2Controller : MonoBehaviour
     public AudioClip glitchAudio;
     private AudioSource playerAudio;
 
-//     public bool scrambled = false;
-//     public bool doSoundEffects, doSinglePlayer;
-//     public int scrambledEggCookTime;
-//     private int boost = 2;
-//     private int boostTime = 5;
-//     private bool isFroozen = false;
-//     private int freezeTime = 4;
-//     private bool glitcher = false;
-//     private int spedometer = 0;
-//     private int buggingTime = 5;
-
     public bool isScrambled = false;
     public bool doSoundEffects, doSinglePlayer;
     public int scrambleDuration;
@@ -51,9 +40,6 @@ public class Player2Controller : MonoBehaviour
     
     private float AITargetX;
     private float AITargetY;
-    // private List<float> AITargetOptionsX;
-    // private List<float> AITargetOptionsY;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -293,6 +279,7 @@ public class Player2Controller : MonoBehaviour
     }
 
     public void GenerateAITarget() {
+        // needs to be worked on
         // AITargetOptionsX.Clear();
         // AITargetOptionsY.Clear();
 
