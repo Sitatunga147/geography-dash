@@ -71,17 +71,17 @@ public class Player2Controller : MonoBehaviour
             if (doSinglePlayer) {
                 speed = 2;
                 GenerateAITarget();
-                float cutoff = 0.5f;
-            	if (AITargetX > transform.position.x) {
+                float cutoff = 0.02f;
+            	if ((AITargetX - transform.position.x) > cutoff) {
             	    horizontalInput = 1;
-            	} else if (AITargetX < transform.position.x) {
+            	} else if ((AITargetX - transform.position.x) < -cutoff) {
             	    horizontalInput = -1;
             	} else {
             	    horizontalInput = 0;
             	}
-                if (AITargetY > transform.position.y) {
+                if ((AITargetY - transform.position.y) > cutoff) {
             	    verticalInput = 1;
-            	} else if (AITargetY < transform.position.y) {
+            	} else if ((AITargetY - transform.position.y) < -cutoff) {
             	    verticalInput = -1;
             	} else {
             	    verticalInput = 0;
@@ -294,7 +294,19 @@ public class Player2Controller : MonoBehaviour
         // AITargetX = AITargetOptionsX[targetIndex];
         // AITargetY = AITargetOptionsY[targetIndex];
 
-        AITargetX = playerControllerScript.countries[countryIndex].transform.position.x;
-        AITargetY = playerControllerScript.countries[countryIndex].transform.position.y;
+        // only run if reached target
+        if (Vector2.Distance(transform.position, new Vector2(AITargetX, AITargetY)) < 0.05) {
+            // probability of selecting right country
+            // private static List<int> probability = new List(){50, 50};
+            // +1 since value is exclusive
+            int randomNumber = Random.Range(1, 101);
+            if (randomNumber <= 75) {
+                AITargetX = playerControllerScript.countries[countryIndex].transform.position.x;
+                AITargetY = playerControllerScript.countries[countryIndex].transform.position.y;
+            } else {
+                AITargetX = Random.Range(-8, 8);
+                AITargetY = Random.Range(-4, 4);
+            }
+        }
     }
 }
