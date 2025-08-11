@@ -3,7 +3,18 @@ guid: 2988aa692ac065140b76f23ab4ea97b5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - FreezeObject: {instanceID: 0}
+  - FrozenObject: {instanceID: 0}
+  - BoostObject: {instanceID: 0}
+  - p1CountryText: {instanceID: 0}
+  - p2CountryText: {instanceID: 0}
+  - p1ScoreText: {instanceID: 0}
+  - p2ScoreText: {instanceID: 0}
+  - timerText: {instanceID: 0}
+  - scoreStart: {instanceID: 0}
+  - timerStart: {instanceID: 0}
+  - clickSoundEffectObject: {fileID: 4750265703814781721, guid: bbdcca3eda9777f21b16a074960a1a75, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

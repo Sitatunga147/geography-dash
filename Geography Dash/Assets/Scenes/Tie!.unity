@@ -439,18 +439,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2988aa692ac065140b76f23ab4ea97b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Freezer: {fileID: 0}
-  Frozen: {fileID: 0}
-  Boost: {fileID: 0}
-  countryText: {fileID: 0}
-  countryTextRed: {fileID: 0}
-  scoreText: {fileID: 0}
-  scoreTextRed: {fileID: 0}
+  FreezeObject: {fileID: 0}
+  FrozenObject: {fileID: 0}
+  BoostObject: {fileID: 0}
+  p1CountryText: {fileID: 0}
+  p2CountryText: {fileID: 0}
+  p1ScoreText: {fileID: 0}
+  p2ScoreText: {fileID: 0}
   timerText: {fileID: 0}
   scoreStart: {fileID: 0}
   timerStart: {fileID: 0}
   timeUp: 0
   yes: 0
+  clickSoundEffectObject: {fileID: 4750265703814781721, guid: bbdcca3eda9777f21b16a074960a1a75, type: 3}
 --- !u!4 &1035620848
 Transform:
   m_ObjectHideFlags: 0
@@ -655,6 +656,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1035620847}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Home
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1035620847}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayClickSoundEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

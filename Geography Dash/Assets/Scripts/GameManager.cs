@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public static bool doSinglePlayer = true;
     private int time = 5;
     private int powerupChoice;
+    public GameObject clickSoundEffectObject;
 
     void Start()
     {
@@ -232,5 +233,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
         timeConstraint = -1;
         score = 0;
+    }
+
+    public void PlayClickSoundEffect()
+    {
+        if (doSoundEffects)
+        {
+            Instantiate(clickSoundEffectObject);
+        }
     }
 }

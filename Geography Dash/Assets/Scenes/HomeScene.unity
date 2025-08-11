@@ -221,6 +221,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1628417913}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayClickSoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &101116239
 GameObject:
@@ -1910,6 +1922,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1628417913}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayClickSoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1020810717
 GameObject:
@@ -2311,6 +2335,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1628417913}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ToggleScramble
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1628417913}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayClickSoundEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2728,6 +2764,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1628417913}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayClickSoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1180833562
 GameObject:
@@ -3115,6 +3163,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1628417913}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayClickSoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1297893813
 GameObject:
@@ -3214,6 +3274,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1628417913}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayClickSoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1308152476
 GameObject:
@@ -3304,6 +3376,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1628417913}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ToggleSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1628417913}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayClickSoundEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4062,6 +4146,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1628417913}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayClickSoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1628417912
 GameObject:
@@ -4104,6 +4200,7 @@ MonoBehaviour:
   timerStart: {fileID: 1051002095}
   timeUp: 0
   yes: 0
+  clickSoundEffectObject: {fileID: 4750265703814781721, guid: bbdcca3eda9777f21b16a074960a1a75, type: 3}
 --- !u!4 &1628417914
 Transform:
   m_ObjectHideFlags: 0
@@ -4737,6 +4834,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1628417913}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayClickSoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1964139997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4862,6 +4971,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1628417913}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: StartWithScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1628417913}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayClickSoundEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
