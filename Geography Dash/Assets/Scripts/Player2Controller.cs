@@ -30,6 +30,7 @@ public class Player2Controller : MonoBehaviour
     private int speedBoost = 2;
     private int speedDuration = 5;
     private bool isFrozen = false;
+    private int numFrozen = 0;
     private int freezeDuration = 4;
     private bool isGlitched = false;
     private int glitchSpeedometer = 0;
@@ -224,9 +225,12 @@ public class Player2Controller : MonoBehaviour
     IEnumerator Freezing()
     {
         isFrozen = true;
+        numFrozen++;
         spawnManagerScript.FreezeP2();
         yield return new WaitForSeconds(freezeDuration);
-        isFrozen = false;
+        numFrozen--;
+        if (numFrozen == 0)
+            isFrozen = false;
     }
 
     public void DoSlow()
